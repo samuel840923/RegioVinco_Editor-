@@ -39,6 +39,8 @@ public class NewMapDialog extends Stage{
     Scene scene;
     Button ok;
     
+    static final String NEWMAP_DIALOG = "new_map_dialog";
+    
       public static NewMapDialog getSingleton() {
 	if (singleton == null)
 	    singleton = new NewMapDialog();
@@ -49,6 +51,7 @@ public class NewMapDialog extends Stage{
             
             dialog = new GridPane();
             scene = new Scene(dialog);
+            scene.getStylesheets().add("/regioeditor/css/tdlm_style.css");
             PropertiesManager props = PropertiesManager.getPropertiesManager();
              fileName =new Label(props.getProperty(PropertyType.FILE_NAME));
              parentDirectory = new Label(props.getProperty(PropertyType.PARENT));
@@ -67,7 +70,7 @@ public class NewMapDialog extends Stage{
              dialog.add(load, 0, 2);
              dialog.add(loadfile, 1, 2);
              dialog.add(ok, 0, 3);
-             
+             dialog.getStyleClass().add(NEWMAP_DIALOG);
              browseDirectory.setOnAction(e -> { 
                  chooseDirectory();
              });

@@ -11,22 +11,31 @@
 	<property name="REMOVE_ICON"		value="Remove.png"></property>
         <property name="MOVE_UP_ICON"		value="MoveUp.png"></property>
 	<property name="MOVE_DOWN_ICON"		value="MoveDown.png"></property>
+        <property name="PAUSE_ICON"		value="pause.png"></property>
+        <property name="PLAY_ICON"		value="play.png"></property>
+         <property name="DIMENSION_ICON"        value="dimension.png"></property>
+        
         
         <!-- TOOLTIPS FOR BUTTONS -->
-	<property name="ADD_ITEM_TOOLTIP"	    value="Select Background Color"></property>
-	<property name="REMOVE_ITEM_TOOLTIP"		    value="Select Fill Color"></property>
+         <property name="PLAY_TOOLTIP"		value="Play music"></property>
+          <property name="PAUSE_TOOLTIP"		value="pause music"></property>
+         <property name="DIMENSION_TOOLTIP"		value="Change dimension"></property>
+	<property name="ADD_ITEM_TOOLTIP"	    value="Add images"></property>
+	<property name="REMOVE_ITEM_TOOLTIP"		    value="Remove images"></property>
 	<property name="MOVE_UP_ITEM_TOOLTIP"	    value="Select Outline Color"></property>
 	<property name="MOVE_DOWN_ITEM_TOOLTIP"	    value="Take Snapshot"></property>
         <property name="SAVE"                       value="Save"></property>
         <property name="CANCEL"	                     value="Cancel"></property>
         <property name="NO"	                      value="No"></property>
-         <property name="BACKGROUND_COLOR"	      value="Background color"></property>
-         <property name="BORDER_THICKNESS"	       value="Border Thickness"></property>
-         <property name="ZOOM"	                      value="Zoom in/out:"></property>
-         <property name = "FILE_NAME"                value = "File name"></property>
-          <property name = "PARENT"                value = "Parent Directory"></property>
-           <property name = "LOAD"                value = "Load file"></property>
-            <property name = "BROWSE"                value = "Browse"></property>
+        <property name="BACKGROUND_COLOR"	      value="Background color"></property>
+        <property name="BORDER_THICKNESS"	       value="Border Thickness"></property>
+        <property name="ZOOM"	                      value="Zoom in/out:"></property>
+        <property name = "FILE_NAME"                value = "File name"></property>
+        <property name = "PARENT"                  value = "Parent Directory"></property>
+        <property name = "LOAD"                    value = "Load file"></property>
+        <property name = "BROWSE"                value = "Browse"></property>
+        <property name = "BORDER_COLOR"                  value = "Border color"></property>
+        <property name = "RENAME"                value = "Rename"></property>
 	
 	<!-- HEADINGS AND PROMPTS -->
 	<property name="WORKSPACE_HEADING_LABEL"    value="To Do List"></property>
@@ -36,6 +45,8 @@
         <property name="ITEMS_HEADING_LABEL"        value="Items"></property>
        <property name="FLAG_PIC"                   value="Flag picture"></property>
         <property name="LEADER_PIC"                value="Leader picture"></property>
+        <property name="FOR_X"                value="Enter width"></property>
+        <property name="FOR_Y"                value="Enter height"></property>
       
 
 	

@@ -31,6 +31,14 @@ public enum PropertyType {
     FILE_NAME,
     PARENT,
     LOAD,
-    BROWSE
-    
+    BROWSE,
+    PAUSE_ICON,
+    PLAY_ICON,
+    RENAME,
+    DIMENSION_TOOLTIP,
+    DIMENSION_ICON,
+    PLAY_TOOLTIP,
+    PAUSE_TOOLTIP,
+    FOR_X,
+    FOR_Y
 }

@@ -5,10 +5,27 @@
  */
 package regioeditor;
 
+import saf.AppTemplate;
+
 /**
  *
  * @author samuelchen
  */
 public class Controller {
+    AppTemplate app;
+      public Controller(AppTemplate initApp) {
+	app = initApp;
+    }
+    public void processAddImage(){
     
+}
+    public void processRemoveImage(){
+        
+    }
+    public void playMusic(){
+        
+    }
+    public void pauseMusic(){
+        
+    }
 }

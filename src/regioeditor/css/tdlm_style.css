@@ -21,11 +21,12 @@
 .bordered_mine {
    -fx-background-color:pink; 
        -fx-padding: 15;
+        -fx-spacing: 15;
       
-   ;
+   
 }
 .heading_label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 80pt;
     -fx-font-weight: bold;
 }
 
@@ -38,5 +39,29 @@
 .prompt_label {
     -fx-font-size: 10pt;
     -fx-font-weight: bold;
-    
+    -fx-pref-width:120;
+}
+.button_label{
+-fx-background-radius: 10;
+-fx-pref-width:50;
+}
+.border_color{
+    -fx-pref-width:100;
+    -fx-font-weight: bold;
+     -fx-font-size: 10pt;
+}
+.dimension_button{
+    -fx-background-radius: 20;
+   
+}
+.new_map_dialog{
+    -fx-background-color:lightskyblue; 
+       -fx-padding:30;
+        -fx-spacing: 100;
+      
+}
+.dimenstion_dialog{
+     -fx-background-color:lightsalmon; 
+       -fx-padding:30;
+        -fx-spacing: 100;
 }
