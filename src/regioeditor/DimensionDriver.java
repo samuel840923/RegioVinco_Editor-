@@ -5,10 +5,18 @@
  */
 package regioeditor;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 /**
  *
  * @author samuelchen
  */
-public class DimensionDriver {
+public class DimensionDriver extends Application{
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+      
+    }
     
 }
