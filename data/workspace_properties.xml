@@ -14,6 +14,7 @@
         <property name="PAUSE_ICON"		value="pause.png"></property>
         <property name="PLAY_ICON"		value="play.png"></property>
          <property name="DIMENSION_ICON"        value="dimension.png"></property>
+         <property name="REDO_ICON"        value="redo.png"></property>
         
         
         <!-- TOOLTIPS FOR BUTTONS -->
@@ -36,6 +37,7 @@
         <property name = "BROWSE"                value = "Browse"></property>
         <property name = "BORDER_COLOR"                  value = "Border color"></property>
         <property name = "RENAME"                value = "Rename"></property>
+         <property name = "REDO_TOOLTIP"                value = "Reasign color"></property>
 	
 	<!-- HEADINGS AND PROMPTS -->
 	<property name="WORKSPACE_HEADING_LABEL"    value="To Do List"></property>

@@ -26,6 +26,7 @@
    
 }
 .heading_label {
+    
     -fx-font-size: 80pt;
     -fx-font-weight: bold;
 }
@@ -64,4 +65,8 @@
      -fx-background-color:lightsalmon; 
        -fx-padding:30;
         -fx-spacing: 100;
+}
+.map_pane{
+    -fx-alignment: center ;
+   
 }

@@ -28,4 +28,8 @@ public class Controller {
     public void pauseMusic(){
         
     }
+
+    public void processDimension() {
+       
+    }
 }

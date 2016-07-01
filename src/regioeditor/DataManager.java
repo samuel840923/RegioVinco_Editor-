@@ -42,12 +42,14 @@ import saf.components.AppDataComponent;
      * @param initApp The application within which this data manager is serving.
      */
     ArrayList<ArrayList<Point2D>> polygonXY;
-    ObservableList<Subregion> region;
+    ObservableList<Subregion> region = FXCollections.observableArrayList();;
     public DataManager(AppTemplate initApp) throws Exception {
 	// KEEP THE APP FOR LATER
 	app = initApp;
     }
-    
+    public void addRegion(Subregion item){
+        region.add(item);
+    }
 
     @Override
     public void reset() {

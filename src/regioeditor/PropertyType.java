@@ -40,5 +40,7 @@ public enum PropertyType {
     PLAY_TOOLTIP,
     PAUSE_TOOLTIP,
     FOR_X,
-    FOR_Y
+    FOR_Y,
+    REDO_ICON,
+    REDO_TOOLTIP
 }

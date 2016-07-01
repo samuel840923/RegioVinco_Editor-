@@ -5,8 +5,10 @@
  */
 package regioeditor;
 
+import com.sun.prism.paint.Color;
 import java.io.IOException;
 import java.time.LocalDate;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -17,6 +19,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -48,6 +53,7 @@ public class Workspace extends AppWorkspaceComponent{
     static final String CLASS_BUTTON = "button_label";
     static final String CLASS_BORDER_COLOR_LABEL = "border_color";
     static final String CLASS_DIMENSION = "dimension_button";
+    static final String CLASS_MAP_PANE = "map_pane";
     static final String EMPTY_TEXT = "";
     static final int LARGE_TEXT_FIELD_LENGTH = 20;
     static final int SMALL_TEXT_FIELD_LENGTH = 5;
@@ -57,7 +63,7 @@ public class Workspace extends AppWorkspaceComponent{
     
     // THIS IS OUR WORKSPACE HEADING
     Label mapLabel;
-    Pane mapPane;
+    VBox mapPane;
     VBox TablePane;
     HBox editToolBar1;
     HBox editToolBar2;
@@ -69,6 +75,7 @@ public class Workspace extends AppWorkspaceComponent{
     Button rename;
     Button dimension;
     Button removeImage;
+    Button reassign;
    
     Button play;
     Button pause;
@@ -119,7 +126,7 @@ public class Workspace extends AppWorkspaceComponent{
       TablePane = new VBox();
       editToolBar1 = new HBox();
       editToolBar2 = new HBox();
-      mapPane = new Pane();
+      mapPane = new VBox();
        
       addImage = gui.initChildButton(editToolBar1, PropertyType.ADD_ICON.toString(), PropertyType.ADD_ITEM_TOOLTIP.toString(), false);
       removeImage = gui.initChildButton(editToolBar1, PropertyType.REMOVE_ICON.toString(), PropertyType.REMOVE_ITEM_TOOLTIP.toString(), true);
@@ -137,11 +144,12 @@ public class Workspace extends AppWorkspaceComponent{
       borderThick.setMinWidth(120);
       rename = new Button(props.getProperty(PropertyType.RENAME));
       editToolBar1.getChildren().addAll(borderThick,thickness,zoom,zooming);
-     
+      
       
       editToolBar2.getChildren().addAll(backgroundColor,colorBackground,
               borderColor,colorBorder,rename);
-     dimension = gui.initChildButton(editToolBar2, PropertyType.DIMENSION_ICON.toString(), PropertyType.DIMENSION_TOOLTIP.toString(), false);
+      dimension = gui.initChildButton(editToolBar2, PropertyType.DIMENSION_ICON.toString(), PropertyType.DIMENSION_TOOLTIP.toString(), false);
+      reassign = gui.initChildButton(editToolBar2, PropertyType.REDO_ICON.toString(), PropertyType.REDO_TOOLTIP.toString(), false);
 
       
       TablePane.getChildren().add(editToolBar1);
@@ -201,6 +209,8 @@ public class Workspace extends AppWorkspaceComponent{
         colorBackground.getStyleClass().add(CLASS_BUTTON);
         dimension.getStyleClass().add(CLASS_DIMENSION);
         rename.getStyleClass().add(CLASS_DIMENSION);
+        reassign.getStyleClass().add(CLASS_BUTTON);
+        mapPane.getStyleClass().add(CLASS_MAP_PANE);
         testing();
        
 //        
@@ -224,21 +234,33 @@ public class Workspace extends AppWorkspaceComponent{
       regionTable.setOnMousePressed(e-> {
           
       });
+      dimension.setOnAction(e ->{
+          control.processDimension();
+      });
         
     }
 
     private void testing() {
-        Pane clipPane = new Pane();
-        Pane testing = new Pane();
-                clip = new Rectangle(app.getGUI().getPrimaryScene().getWidth()/16,app.getGUI().getPrimaryScene().getHeight()/4,500,400);
-                clip.setFill(Paint.valueOf("Black"));
-             clipPane.setClip(clip);
-             
-             Circle c = new Circle(400,400,60);
-             c.setFill(Paint.valueOf("pink"));
-             testing.getChildren().add(c);
-             clipPane.getChildren().add(testing);
-             mapPane.getChildren().add(clipPane);
+           Pane pane = new Pane();
+           Pane p = new Pane();
+          
+           
+           Rectangle rec = new Rectangle(app.getGUI().getPrimaryScene().getWidth()/2.5,500);
+           p.setClip(rec);
+           Rectangle r = new Rectangle(app.getGUI().getPrimaryScene().getWidth()/2.5,500);
+          
+           Circle c  = new  Circle(100,50,70);
+          c.setFill(Paint.valueOf("Red"));
+          Circle c1  = new  Circle(100,300,70);
+           mapPane.getChildren().add(p);
+           pane.getChildren().add(r);
+           pane.getChildren().addAll(c,c1);
+           p.getChildren().add(pane);
+            DataManager data = (DataManager) app.getDataComponent();
+            Subregion test = new Subregion("Taipei","Tsai","Taiwan");
+            
+           
+            
        workspace.getItems().addAll(mapPane,TablePane);
 //       
        app.getGUI().getAppPane().setCenter(workspace);
