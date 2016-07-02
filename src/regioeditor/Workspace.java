@@ -161,11 +161,11 @@ public class Workspace extends AppWorkspaceComponent{
        // NOW SETUP THE TABLE COLUMN
         mapPane.getChildren().add(mapLabel);
         regionColumn = new TableColumn(props.getProperty(PropertyType.SUBREGION_NAME));
-        leaderColumn = new TableColumn(props.getProperty(PropertyType.LEADER_NAME));
         capitalColumn = new TableColumn(props.getProperty(PropertyType.CAPITAL));
-        regionColumn.setCellValueFactory(new PropertyValueFactory<String, String>("subregion"));
-        capitalColumn.setCellValueFactory(new PropertyValueFactory<String, String>("capital"));
-        leaderColumn.setCellValueFactory(new PropertyValueFactory<LocalDate, String>("leader"));
+        leaderColumn = new TableColumn(props.getProperty(PropertyType.LEADER_NAME));
+        regionColumn.setCellValueFactory(new PropertyValueFactory<String, String>("name"));
+        capitalColumn.setCellValueFactory(new PropertyValueFactory<String, String>("Capital"));
+        leaderColumn.setCellValueFactory(new PropertyValueFactory<String, String>("leader"));
        
         regionTable.getColumns().add(regionColumn);
         regionTable.getColumns().add(capitalColumn);
@@ -257,8 +257,8 @@ public class Workspace extends AppWorkspaceComponent{
            pane.getChildren().addAll(c,c1);
            p.getChildren().add(pane);
             DataManager data = (DataManager) app.getDataComponent();
-            Subregion test = new Subregion("Taipei","Tsai","Taiwan");
-            
+            Subregion test = new Subregion("Taiwan","Taipei","Tsai");
+            data.addRegion(test);
            
             
        workspace.getItems().addAll(mapPane,TablePane);

@@ -27,7 +27,7 @@ public class Subregion {
     
     final StringProperty capital;
     final StringProperty leader;
-    final StringProperty region_name;
+    final StringProperty name;
  
 
        
@@ -35,26 +35,27 @@ public class Subregion {
     {
         capital = new SimpleStringProperty(DEFAULT_CAPITAL);
         leader = new SimpleStringProperty(DEFAULT_LEADER);
-        region_name = new SimpleStringProperty(DEFAULT_REGION_NAME);
+        name = new SimpleStringProperty(DEFAULT_REGION_NAME);
     }
-    public Subregion(String initC, String initL,String initR){
+    public Subregion(String initR, String initC,String initL){
         this();
+        name.set(initR);
         capital.set(initC);
        leader.set(initL);
-       region_name.set(initR);
+       
        }
 
     public String getCapital() {
         return capital.get();
     }
-    public String getRegion(){
-        return region_name.get();
+    public String getName(){
+        return name.get();
     }
-    public void setRegion(String value){
-        region_name.set(value);
+    public void setName(String value){
+        name.set(value);
     }
     public StringProperty regionProperty(){
-        return region_name;
+        return name;
     }
     public void setCapital(String value) {
         capital.set(value);
@@ -81,7 +82,7 @@ public class Subregion {
     public void reset() {
         setCapital(DEFAULT_CAPITAL);
         setLeader(DEFAULT_LEADER);
-        setRegion(DEFAULT_REGION_NAME);
+        setName(DEFAULT_REGION_NAME);
       
     }
 }

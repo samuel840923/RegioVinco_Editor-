@@ -70,14 +70,20 @@ public class SubregionDialog extends Stage{
          regionText = new TextField();
          capText = new TextField();
          ledText = new TextField();
-          String imagePath = FILE_PROTOCOL + PATH_IMAGES + "Default.png";
+          String imagePath = FILE_PROTOCOL + PATH_IMAGES + "default.png";
+           String flagPath = FILE_PROTOCOL + PATH_IMAGES + "taiwan.png";
           Image buttonImage = new Image(imagePath);
+          Image flagImage = new Image(flagPath);
+          flagPic = new ImageView();
+          flagPic.setImage(flagImage);
+          flagPic.setFitWidth(150);
+          flagPic.setFitHeight(100);
           leaderPic = new ImageView();
           leaderPic.setImage(buttonImage);
-          leaderPic.setFitWidth(100);
+          leaderPic.setFitWidth(150);
           leaderPic.setFitHeight(100);
+         dialog.setVgap(10);
          
-         flagPic = new ImageView();
          dialog.add(region, 0, 0);
          dialog.add(regionText, 1, 0);
          dialog.add(capital, 0, 1);
