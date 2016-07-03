@@ -251,7 +251,7 @@ public class Workspace extends AppWorkspaceComponent{
            Rectangle rec = new Rectangle(app.getGUI().getPrimaryScene().getWidth()/2.5,500);
            p.setClip(rec);
            Rectangle r = new Rectangle(app.getGUI().getPrimaryScene().getWidth()/2.5,500);
-          
+           r.setFill(Paint.valueOf("blue"));
            Circle c  = new  Circle(100,50,70);
           c.setFill(Paint.valueOf("Red"));
           Circle c1  = new  Circle(100,300,70);
