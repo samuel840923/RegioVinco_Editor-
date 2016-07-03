@@ -39,6 +39,9 @@ public class NewMapDialog extends Stage{
     Scene scene;
     Button ok;
     
+    Label chose;
+    Label loaded;
+    
     static final String NEWMAP_DIALOG = "new_map_dialog";
     
       public static NewMapDialog getSingleton() {
@@ -62,13 +65,17 @@ public class NewMapDialog extends Stage{
              
              file = new TextField();
              ok = new Button("Ok");
+             chose = new Label("");
+             loaded = new Label("");
              
              dialog.add(fileName, 0, 0);
              dialog.add(file, 1, 0);
              dialog.add(parentDirectory, 0, 1);
              dialog.add(browseDirectory, 1, 1);
+             dialog.add(chose, 2, 1);
              dialog.add(load, 0, 2);
              dialog.add(loadfile, 1, 2);
+             dialog.add(loaded, 2, 2);
              dialog.add(ok, 0, 3);
              dialog.getStyleClass().add(NEWMAP_DIALOG);
              browseDirectory.setOnAction(e -> { 
@@ -95,7 +102,14 @@ public class NewMapDialog extends Stage{
     }
 
     private void loadFile() {
-       
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+                 FileChooser fc = new FileChooser();
+	
+		fc.setTitle(props.getProperty(SAVE_WORK_TITLE));
+		
+		
+
+		File selectedFile = fc.showOpenDialog(singleton);
     }
      
 }
