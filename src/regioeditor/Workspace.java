@@ -237,6 +237,9 @@ public class Workspace extends AppWorkspaceComponent{
       dimension.setOnAction(e ->{
           control.processDimension();
       });
+      rename.setOnAction(e -> {
+          control.processRename();
+      });
         
     }
 

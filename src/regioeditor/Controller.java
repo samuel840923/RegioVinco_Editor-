@@ -5,7 +5,16 @@
  */
 package regioeditor;
 
+import java.io.File;
+import java.util.Optional;
+import javafx.scene.control.TextInputDialog;
+import javafx.stage.FileChooser;
+import properties_manager.PropertiesManager;
 import saf.AppTemplate;
+import static saf.settings.AppPropertyType.SAVE_WORK_TITLE;
+import static saf.settings.AppPropertyType.WORK_FILE_EXT;
+import static saf.settings.AppPropertyType.WORK_FILE_EXT_DESC;
+import static saf.settings.AppStartupConstants.PATH_WORK;
 
 /**
  *
@@ -17,7 +26,14 @@ public class Controller {
 	app = initApp;
     }
     public void processAddImage(){
-    
+         PropertiesManager props = PropertiesManager.getPropertiesManager();
+                 FileChooser fc = new FileChooser();
+	
+		fc.setTitle(props.getProperty(SAVE_WORK_TITLE));
+		fc.getExtensionFilters().addAll(
+		new FileChooser.ExtensionFilter(props.getProperty(WORK_FILE_EXT_DESC), props.getProperty(WORK_FILE_EXT)));
+
+		File selectedFile = fc.showOpenDialog(app.getGUI().getWindow());
 }
     public void processRemoveImage(){
         
@@ -31,5 +47,15 @@ public class Controller {
 
     public void processDimension() {
        
+    }
+
+    void processRename() {
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+      TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle(props.getProperty(PropertyType.RENAME_DIALOG));
+    dialog.setHeaderText(props.getProperty(PropertyType.RENAME_HEADER));
+    dialog.setContentText(props.getProperty(PropertyType.RENAME_CONTENT));
+    Optional<String> result = dialog.showAndWait();
+    
     }
 }

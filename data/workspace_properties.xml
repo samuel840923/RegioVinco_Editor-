@@ -49,6 +49,9 @@
         <property name="LEADER_PIC"                value="Leader picture"></property>
         <property name="FOR_X"                value="Enter width"></property>
         <property name="FOR_Y"                value="Enter height"></property>
+        <property name="RENAME_DIALOG,"                value="File Rename"></property>
+        <property name="RENAME_CONTENT"                value="Enter the new file name"></property>
+        <property name="RENAME_HEADER"                value="Enter below to change file name"></property>
       
 
 	

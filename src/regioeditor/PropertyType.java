@@ -42,5 +42,8 @@ public enum PropertyType {
     FOR_X,
     FOR_Y,
     REDO_ICON,
-    REDO_TOOLTIP
+    REDO_TOOLTIP,
+    RENAME_DIALOG,
+    RENAME_CONTENT,
+    RENAME_HEADER,
 }
