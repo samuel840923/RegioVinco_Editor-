@@ -96,7 +96,7 @@ public class SubregionDialog extends Stage{
          dialog.add(leaderPic, 1, 4);
          
          buttonPane = new HBox();
-         saved = new Button(props.getProperty(PropertyType.SAVE));
+         saved = new Button("Ok");
          next = new Button(props.getProperty(PropertyType.NEXT));
          prev = new Button(props.getProperty(PropertyType.PREV));
          buttonPane.getChildren().addAll(prev,saved,next);

@@ -34,5 +34,8 @@ public class FileManager implements AppFileComponent{
     public void importData(AppDataComponent data, String filePath) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public void loadGeometric(AppDataComponent data, String filePath){
+        
+    }
     
 }

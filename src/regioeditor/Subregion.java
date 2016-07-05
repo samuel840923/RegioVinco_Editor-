@@ -28,6 +28,9 @@ public class Subregion {
     final StringProperty capital;
     final StringProperty leader;
     final StringProperty name;
+    int red;
+    int green;
+    int blue;
  
 
        
@@ -84,6 +87,15 @@ public class Subregion {
         setLeader(DEFAULT_LEADER);
         setName(DEFAULT_REGION_NAME);
       
+    }
+    public void setR(int r){
+        red = r;
+    }
+      public void setG(int g){
+        green = g;
+    }
+        public void setB(int b){
+        blue = b;
     }
 }
 
