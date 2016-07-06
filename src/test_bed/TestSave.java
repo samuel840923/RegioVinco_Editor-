@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -26,6 +28,7 @@ import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 import javax.json.stream.JsonGenerator;
 import regioeditor.DataManager;
+import regioeditor.FileManager;
 import regioeditor.Subregion;
 import static saf.settings.AppStartupConstants.FILE_PROTOCOL;
 import static saf.settings.AppStartupConstants.PATH_IMAGES;
@@ -40,81 +43,20 @@ import static saf.settings.AppStartupConstants.PATH_IMAGES;
 
 public class TestSave {
     static DataManager data ;
-    static final String JSON_FILEPATH = "geometricFilePath";
-    static final String JSON_BACKGROUND_COLOR = "backgroundcolor";
-    static final String JSON_BORDER_COLOR = "bordercolor";
-    static final String JSON_SCALE = "paneScale";
-    static final String JSON_THICKNESS = "thickness";
-    static final String JSON_DIMENSION_W = "dimensionW";
-    static final String JSON_DIMENSION_H= "dimensionH";
-    static final String JSON_REGION = "region";
-     static final String JSON_CAPITAL = "capital";
-      static final String JSON_LEADER = "leader";
-      static final String JSON_COLOR_RED = "red";
-      static final String JSON_COLOR_GREEN = "green";
-      static final String JSON_COLOR_BLUE = "blue";
-      static final String JSON_SUBREGION = "Subregion";
+ 
+      
     
     public static void main(String[] args) throws IOException{
-     createSlovakia();
+     createAndorra();
      save();    
     }
-    public static void save() throws FileNotFoundException{
-        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-	ObservableList<Subregion> items = data.getRegion();
-        for (int i=0;i<items.size();i++) {
-            String cap = items.get(i).getCapital();
-            String led = items.get(i).getLeader();
-            if(items.get(i).getCapital()==null){
-                cap = "null";             
-            }
-             if(items.get(i).getLeader()==null){
-                led = "null";             
-            }
-	        JsonObject itemJson = Json.createObjectBuilder()
-                   .add(JSON_REGION , items.get(i).getName())       
-                   .add(JSON_CAPITAL , cap)
-                   .add(JSON_LEADER , led)
-           
-                  
-		    .add(JSON_COLOR_RED , items.get(i).getR())
-		    .add(JSON_COLOR_GREEN , items.get(i).getG())
-                    .add(JSON_COLOR_BLUE , items.get(i).getB()).build();
-                    
-	    arrayBuilder.add(itemJson);
-	}
-        JsonArray itemsArray = arrayBuilder.build();
-       
-        JsonObject dataManagerJSO = Json.createObjectBuilder()
-		.add(JSON_FILEPATH, data.getfilePath())
-                .add(JSON_BACKGROUND_COLOR, data.getBackgroundColor().toString())
-		.add(JSON_BORDER_COLOR, data.getBorderColor().toString())
-                .add(JSON_SCALE, data.getScale())
-		.add(JSON_THICKNESS, data.getThickness())
-                .add(JSON_DIMENSION_W, data.getDimensionW())
-		.add(JSON_DIMENSION_H, data.getDimensionH())
-                .add(JSON_SUBREGION,itemsArray)
-		.build();
-        
-        String filePath = "./HW5SampleData/work/testing";
-        File file = new File(filePath);
-        
-        Map<String, Object> properties = new HashMap<>(1);
-	properties.put(JsonGenerator.PRETTY_PRINTING, true);
-	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
-	StringWriter sw = new StringWriter();
-	JsonWriter jsonWriter = writerFactory.createWriter(sw);
-	jsonWriter.writeObject(dataManagerJSO);
-	jsonWriter.close();
-
-	// INIT THE WRITER
-	OutputStream os = new FileOutputStream(filePath);
-	JsonWriter jsonFileWriter = Json.createWriter(os);
-	jsonFileWriter.writeObject(dataManagerJSO);
-	String prettyPrinted = sw.toString();
-	PrintWriter pw = new PrintWriter(filePath);
-	pw.write(prettyPrinted);
-	pw.close();
+    public static void save() throws FileNotFoundException, IOException{
+         String filePath = "./HW5SampleData/work/testing";
+         FileManager file = new FileManager();
+         file.saveData(data, filePath);
+         
+         
+         
     }
     public  static void createAndorra(){
         data = new DataManager();
