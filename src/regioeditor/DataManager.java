@@ -28,7 +28,7 @@ import saf.components.AppDataComponent;
     Color borderColor;
     Double borderThickness;
     Double paneScale;
-    
+    String geometricFile;
     // NAME OF THE TODO LIST
     StringProperty name;
     
@@ -48,8 +48,11 @@ import saf.components.AppDataComponent;
      * @param initApp The application within which this data manager is serving.
      */
     ArrayList<ArrayList<Point2D>> polygonXY;
-    ObservableList<Subregion> region ; 
-    ArrayList<Image> images;
+    ObservableList<Subregion> region = FXCollections.observableArrayList();
+    ArrayList<String> images ;
+    ArrayList<Point2D> imageLocation;
+    double dimensionW;
+    double dimensionH;
     public DataManager(AppTemplate initApp) throws Exception {
 	// KEEP THE APP FOR LATER
 	app = initApp;
@@ -57,14 +60,27 @@ import saf.components.AppDataComponent;
     }
 
     public DataManager() {
-        images = new ArrayList<Image>();
-        FXCollections.observableArrayList();
+        images = new ArrayList<String>();
+        imageLocation = new ArrayList<Point2D>();
+        
+      
+        
+    }
+    public void addLocation(Point2D e){
+        imageLocation.add(e);
+        
     }
     public void addRegion(Subregion item){
         region.add(item);
     }
-    public void addImages(Image i){
+    public void addImages(String i){
         images.add(i);
+    }
+    public String getfilePath(){
+        return geometricFile;
+    }
+    public void setfilePath(String path){
+        geometricFile = path;
     }
     public void setBorderColor(Color c){
         borderColor = c;
@@ -72,10 +88,10 @@ import saf.components.AppDataComponent;
      public void setBackgroundColor(Color c){
         backgroundColor = c;
     }
-      public Color getBorderColor(Color c){
+      public Color getBorderColor(){
        return  borderColor;
     }
-     public Color getBackgroundColor(Color c){
+     public Color getBackgroundColor(){
        return  backgroundColor; 
     }
      public void setThickness(double v){
@@ -90,6 +106,22 @@ import saf.components.AppDataComponent;
        public double getScale(){
          return paneScale;
      }
+      public void setDimensionW(double w){
+          dimensionW = w;
+      }
+      public double getDimensionW(){
+          return dimensionW;
+      }
+       public void setDimensionH(double h){
+          dimensionH = h;
+      }
+      public double getDimensionH(){
+          return dimensionH;
+      }
+      public Subregion getSubregion(int i){
+          return region.get(i);
+          
+      }
 
     @Override
     public void reset() {
@@ -98,7 +130,7 @@ import saf.components.AppDataComponent;
     public ObservableList<Subregion> getRegion(){
         return region;
     }
-    public ArrayList<Image> getImages(){
+    public ArrayList<String> getImages(){
         return images;
     }
     }

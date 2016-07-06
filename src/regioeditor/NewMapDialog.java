@@ -109,7 +109,9 @@ public class NewMapDialog extends Stage{
 		
 		
 
-		File selectedFile = fc.showOpenDialog(singleton);
+		File selectedFile = fc.showSaveDialog(singleton);
+                System.out.println(selectedFile.getPath());
+                
     }
      
 }

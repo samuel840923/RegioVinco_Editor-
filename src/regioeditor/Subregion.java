@@ -97,5 +97,14 @@ public class Subregion {
         public void setB(int b){
         blue = b;
     }
+        public int getR(){
+            return red;
+        }
+         public int getG(){
+            return green;
+        }
+          public int getB(){
+            return blue;
+        }
 }
 
