@@ -10,7 +10,7 @@
     "dimensionH":536.0,
     "Subregion":[
         {
-            "region":"Acquaviva",
+            "name":"Acquaviva",
             "capital":"null",
             "leader":"Lucia Tamagnini",
             "red":225,
@@ -18,7 +18,7 @@
             "blue":225
         },
         {
-            "region":"Borgo Maggiore",
+            "name":"Borgo Maggiore",
             "capital":"null",
             "leader":"Sergio Nanni",
             "red":200,
@@ -26,7 +26,7 @@
             "blue":200
         },
         {
-            "region":"Chiesanuova",
+            "name":"Chiesanuova",
             "capital":"null",
             "leader":"Franco Santi",
             "red":175,
@@ -34,7 +34,7 @@
             "blue":175
         },
         {
-            "region":"Domagnano",
+            "name":"Domagnano",
             "capital":"null",
             "leader":"Gabriel Guidi",
             "red":150,
@@ -42,7 +42,7 @@
             "blue":150
         },
         {
-            "region":"Faetano",
+            "name":"Faetano",
             "capital":"null",
             "leader":"Pier Mario Bedetti",
             "red":125,
@@ -50,7 +50,7 @@
             "blue":125
         },
         {
-            "region":"Fiorentino",
+            "name":"Fiorentino",
             "capital":"null",
             "leader":"Gerri Fabbri",
             "red":100,
@@ -58,7 +58,7 @@
             "blue":100
         },
         {
-            "region":"Montegiardino",
+            "name":"Montegiardino",
             "capital":"null",
             "leader":"Marta Fabbri",
             "red":75,
@@ -66,7 +66,7 @@
             "blue":75
         },
         {
-            "region":"City of San Marino",
+            "name":"City of San Marino",
             "capital":"null",
             "leader":"Maria Teresa Beccari",
             "red":50,
@@ -74,7 +74,7 @@
             "blue":50
         },
         {
-            "region":"Serravalle",
+            "name":"Serravalle",
             "capital":"null",
             "leader":"Leandro Maiani",
             "red":25,

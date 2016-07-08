@@ -216,7 +216,6 @@ public class Workspace extends AppWorkspaceComponent{
        imagePane = redrawImage();
        clipPane.getChildren().addAll(polygonPane,imagePane);
        workspace.getItems().addAll(mapPane,TablePane);
-//       
        app.getGUI().getAppPane().setCenter(workspace);
        done = true;
        System.out.println(data.isFlagExist(data.getName()));

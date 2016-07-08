@@ -169,8 +169,21 @@ import saf.components.AppDataComponent;
         for(int i =0;i<region.size();i++){
             String dir = "./HW5SampleData/export/The World/Europe/"+name+"/";
             String flag = region.get(i).getName()+" Flag.png";
-            System.out.println(dir+flag);
             File file = new File(dir+flag);
+            if(!(file.exists()))
+                return false;
+               
+        }
+       return true;
+    }
+    public boolean isLeaderExist(String name){
+        for(int i =0;i<region.size();i++){
+            String dir = "./HW5SampleData/export/The World/Europe/"+name+"/";
+            if(region.get(i).getLeader().equals("null"))
+                return false;
+            String lead = region.get(i).getLeader()+".png";
+            System.out.println(dir+lead);
+            File file = new File(dir+lead);
             if(!(file.exists()))
                 return false;
                

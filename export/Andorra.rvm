@@ -1,14 +1,10 @@
 
 {
-    "country name":"Andorra",
-    "geometricFilePath":"./HW5SampleData/raw_map_data/Andorra.json",
-    "backgroundcolor":"0xffa500ff",
-    "bordercolor":"0x000000ff",
-    "paneScale":600.0,
-    "thickness":0.001,
-    "dimensionW":802.0,
-    "dimensionH":536.0,
-    "Subregion":[
+    "name":"Andorra",
+    "subregions_have_capitals":true,
+    "subregions_have_flags":true,
+    "subregions_have_leaders":true,
+    "subregions":[
         {
             "name":"Ordino",
             "capital":"Ordino (town)",
@@ -64,24 +60,6 @@
             "red":188,
             "green":188,
             "blue":188
-        }
-    ],
-    "image location":[
-        {
-            "x":580.0,
-            "y":390.0
-        },
-        {
-            "x":12.0,
-            "y":9.0
-        }
-    ],
-    "image url":[
-        {
-            "image":"file:./HW5SampleData/export/The World/Europe/Andorra Flag.png"
-        },
-        {
-            "image":"file:./HW5SampleData/export/The World/Europe/Andorra.png"
         }
     ]
 }

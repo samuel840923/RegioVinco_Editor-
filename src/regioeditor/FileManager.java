@@ -49,7 +49,7 @@ public class FileManager implements AppFileComponent{
     static final String JSON_THICKNESS = "thickness";
     static final String JSON_DIMENSION_W = "dimensionW";
     static final String JSON_DIMENSION_H= "dimensionH";
-    static final String JSON_REGION = "region";
+    static final String JSON_REGION = "name";
      static final String JSON_CAPITAL = "capital";
       static final String JSON_LEADER = "leader";
       static final String JSON_COLOR_RED = "red";
@@ -69,6 +69,12 @@ public class FileManager implements AppFileComponent{
     static final String JSON_X = "X";
     static final String JSON_Y = "Y";
     ArrayList<Point2D> points ;
+    
+    static final String EXPORT_JSON_NAME = "name";
+    static final String EXPORT_JSON_SUBREGIONS_HAVE_CAPITALS = "subregions_have_capitals";
+    static final String EXPORT_JSON_SUBREGIONS_HAVE_FLAGS = "subregions_have_flags";
+    static final String EXPORT_JSON_SUBREGIONS_HAVE_LEADERS = "subregions_have_leaders";
+    static final String EXPORT_JSON_SUBREGIONS = "subregions";
     static boolean done = false;
 
     @Override
@@ -210,22 +216,79 @@ done = true;
         DataManager data = (DataManager)datas;
         String path = filePath+data.getName()+".rvm";
         
-//        Map<String, Object> properties = new HashMap<>(1);
-//	properties.put(JsonGenerator.PRETTY_PRINTING, true);
-//	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
-//	StringWriter sw = new StringWriter();
-//	JsonWriter jsonWriter = writerFactory.createWriter(sw);
-//	jsonWriter.writeObject(dataManagerJSO);
-//	jsonWriter.close();
-//
-//	// INIT THE WRITER
-//	OutputStream os = new FileOutputStream(filePath);
-//	JsonWriter jsonFileWriter = Json.createWriter(os);
-//	jsonFileWriter.writeObject(dataManagerJSO);
-//	String prettyPrinted = sw.toString();
-//	PrintWriter pw = new PrintWriter(filePath);
-//	pw.write(prettyPrinted);
-//	pw.close();
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+	ObservableList<Subregion> items = data.getRegion();
+        for (int i=0;i<items.size();i++) {
+            String cap = items.get(i).getCapital();
+            String led = items.get(i).getLeader();
+            if(items.get(i).getCapital().equals("null")&&items.get(i).getLeader().equals("null")){
+                JsonObject itemJson = Json.createObjectBuilder()
+                   .add(JSON_REGION , items.get(i).getName())       
+		    .add(JSON_COLOR_RED , items.get(i).getR())
+		    .add(JSON_COLOR_GREEN , items.get(i).getG())
+                    .add(JSON_COLOR_BLUE , items.get(i).getB()).build();
+                    
+	    arrayBuilder.add(itemJson);
+            }
+            else if(items.get(i).getCapital().equals("null")){
+	        JsonObject itemJson = Json.createObjectBuilder()
+                   .add(JSON_REGION , items.get(i).getName())        
+                   .add(JSON_LEADER , led)
+		    .add(JSON_COLOR_RED , items.get(i).getR())
+		    .add(JSON_COLOR_GREEN , items.get(i).getG())
+                    .add(JSON_COLOR_BLUE , items.get(i).getB()).build();
+	    arrayBuilder.add(itemJson);
+            }
+             else if(items.get(i).getLeader().equals("null")){
+	        JsonObject itemJson = Json.createObjectBuilder()
+                   .add(JSON_REGION , items.get(i).getName())        
+                   .add(JSON_CAPITAL , cap)
+		    .add(JSON_COLOR_RED , items.get(i).getR())
+		    .add(JSON_COLOR_GREEN , items.get(i).getG())
+                    .add(JSON_COLOR_BLUE , items.get(i).getB()).build();
+	    arrayBuilder.add(itemJson);
+            }
+             else{
+                
+	        JsonObject itemJson = Json.createObjectBuilder()
+                   .add(JSON_REGION , items.get(i).getName())       
+                   .add(JSON_CAPITAL , cap)
+                   .add(JSON_LEADER , led)
+           
+                  
+		    .add(JSON_COLOR_RED , items.get(i).getR())
+		    .add(JSON_COLOR_GREEN , items.get(i).getG())
+                    .add(JSON_COLOR_BLUE , items.get(i).getB()).build();
+                    
+	    arrayBuilder.add(itemJson);
+
+                 
+             }
+	}
+        JsonArray regionArray = arrayBuilder.build();
+          JsonObject dataManagerJSO = Json.createObjectBuilder()
+                 .add(EXPORT_JSON_NAME, data.getName())
+		.add(EXPORT_JSON_SUBREGIONS_HAVE_CAPITALS, data.isCapitalExist())
+                .add(EXPORT_JSON_SUBREGIONS_HAVE_FLAGS, data.isFlagExist(data.getName()))
+		.add(EXPORT_JSON_SUBREGIONS_HAVE_LEADERS, data.isLeaderExist(data.getName()))
+                .add(EXPORT_JSON_SUBREGIONS, regionArray)
+		.build();
+        Map<String, Object> properties = new HashMap<>(1);
+	properties.put(JsonGenerator.PRETTY_PRINTING, true);
+	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+	StringWriter sw = new StringWriter();
+	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(dataManagerJSO);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	OutputStream os = new FileOutputStream(path);
+	JsonWriter jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(dataManagerJSO);
+	String prettyPrinted = sw.toString();
+	PrintWriter pw = new PrintWriter(path);
+	pw.write(prettyPrinted);
+	pw.close();
     }
 
     @Override

@@ -32,8 +32,10 @@ public class TestLoad {
     public static DataManager data;
     
     public static void main(String[] args) throws IOException{
-        load("A");
-        System.out.println(data.isFlagExist(data.getName()));
+        load("S");
+        
+        FileManager file = new FileManager();
+        file.exportData(data, "./export/");
     }
 
 public static void load(String s) throws IOException{

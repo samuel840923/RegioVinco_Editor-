@@ -10,7 +10,7 @@
     "dimensionH":536.0,
     "Subregion":[
         {
-            "region":"Bratislava",
+            "name":"Bratislava",
             "capital":"null",
             "leader":"null",
             "red":250,
@@ -18,7 +18,7 @@
             "blue":250
         },
         {
-            "region":"Trnava",
+            "name":"Trnava",
             "capital":"null",
             "leader":"null",
             "red":249,
@@ -26,7 +26,7 @@
             "blue":249
         },
         {
-            "region":"Trencin",
+            "name":"Trencin",
             "capital":"null",
             "leader":"null",
             "red":248,
@@ -34,7 +34,7 @@
             "blue":249
         },
         {
-            "region":"Nitra",
+            "name":"Nitra",
             "capital":"null",
             "leader":"null",
             "red":247,
@@ -42,7 +42,7 @@
             "blue":247
         },
         {
-            "region":"Zilina",
+            "name":"Zilina",
             "capital":"null",
             "leader":"null",
             "red":246,
@@ -50,7 +50,7 @@
             "blue":246
         },
         {
-            "region":"Banska Bystrica",
+            "name":"Banska Bystrica",
             "capital":"null",
             "leader":"null",
             "red":245,
@@ -58,7 +58,7 @@
             "blue":245
         },
         {
-            "region":"Presov",
+            "name":"Presov",
             "capital":"null",
             "leader":"null",
             "red":244,
@@ -66,7 +66,7 @@
             "blue":244
         },
         {
-            "region":"Kosice",
+            "name":"Kosice",
             "capital":"null",
             "leader":"null",
             "red":243,
