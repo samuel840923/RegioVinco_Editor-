@@ -67,6 +67,6 @@
         -fx-spacing: 100;
 }
 .map_pane{
-    -fx-alignment: center ;
-   
+   position:relative;
+    -fx-alignment: center;
 }

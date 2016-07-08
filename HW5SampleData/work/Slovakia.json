@@ -1,9 +1,9 @@
 
 {
-    "geometricFilePath":"./raw_map_data/Slovakia.json",
+    "geometricFilePath":"./HW5SampleData/raw_map_data/Slovakia.json",
     "backgroundcolor":"0xffa500ff",
     "bordercolor":"0x000000ff",
-    "paneScale":1.5,
+    "paneScale":50.0,
     "thickness":0.75,
     "dimensionW":802.0,
     "dimensionH":536.0,
@@ -71,6 +71,24 @@
             "red":243,
             "green":243,
             "blue":243
+        }
+    ],
+    "image location":[
+        {
+            "x":540.0,
+            "y":365.0
+        },
+        {
+            "x":25.0,
+            "y":25.0
+        }
+    ],
+    "image url":[
+        {
+            "image":"file:./HW5SampleData/export/The World/Europe/Slovakia Flag.png"
+        },
+        {
+            "image":"file:./HW5SampleData/export/The World/Europe/Slovenian Flag.png"
         }
     ]
 }

@@ -57,14 +57,21 @@ import saf.components.AppDataComponent;
 	// KEEP THE APP FOR LATER
 	app = initApp;
         FXCollections.observableArrayList();
+         images = new ArrayList<String>();
+        imageLocation = new ArrayList<Point2D>();
+        polygonXY =  new ArrayList<ArrayList<Point2D>>();
     }
 
     public DataManager() {
         images = new ArrayList<String>();
         imageLocation = new ArrayList<Point2D>();
+         polygonXY =  new ArrayList<ArrayList<Point2D>>();
         
       
         
+    }
+    public void addGeo(ArrayList<Point2D> poly){
+        polygonXY.add(poly);
     }
     public void addLocation(Point2D e){
         imageLocation.add(e);
@@ -122,6 +129,9 @@ import saf.components.AppDataComponent;
           return region.get(i);
           
       }
+      public ArrayList<Point2D> getLocation(){
+          return imageLocation;
+      }
 
     @Override
     public void reset() {
@@ -132,6 +142,9 @@ import saf.components.AppDataComponent;
     }
     public ArrayList<String> getImages(){
         return images;
+    }
+    public ArrayList<ArrayList<Point2D>> getPoly(){
+        return polygonXY;
     }
     }
     

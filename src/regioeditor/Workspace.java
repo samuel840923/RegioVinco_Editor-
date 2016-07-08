@@ -5,10 +5,12 @@
  */
 package regioeditor;
 
-import com.sun.prism.paint.Color;
+
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -19,11 +21,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -35,14 +40,17 @@ import saf.components.AppWorkspaceComponent;
 import saf.ui.AppGUI;
 import saf.ui.AppMessageDialogSingleton;
 import saf.ui.AppYesNoCancelDialogSingleton;
-
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+import static saf.settings.AppStartupConstants.FILE_PROTOCOL;
+import static saf.settings.AppStartupConstants.PATH_IMAGES;
 /**
  *
  * @author samuelchen
  */
 public class Workspace extends AppWorkspaceComponent{
      AppTemplate app;
-
+     static boolean done = false;
     // IT KNOWS THE GUI IT IS PLACED INSIDE
     AppGUI gui;
      static final String CLASS_BORDERED_PANE = "bordered_pane";
@@ -62,8 +70,13 @@ public class Workspace extends AppWorkspaceComponent{
    
     
     // THIS IS OUR WORKSPACE HEADING
+    Polygon poly;
+    Pane imagePane;
+  Pane polygonPane ;
+   Pane p ;
     Label mapLabel;
-    VBox mapPane;
+    Pane clipPane;
+    Pane mapPane;
     VBox TablePane;
     HBox editToolBar1;
     HBox editToolBar2;
@@ -106,6 +119,7 @@ public class Workspace extends AppWorkspaceComponent{
     
  public Workspace(AppTemplate initApp) throws IOException {
 	// KEEP THIS FOR LATER
+        
 	app = initApp;
 
 	// KEEP THE GUI FOR LATER
@@ -126,7 +140,7 @@ public class Workspace extends AppWorkspaceComponent{
       TablePane = new VBox();
       editToolBar1 = new HBox();
       editToolBar2 = new HBox();
-      mapPane = new VBox();
+      mapPane = new Pane();
        
       addImage = gui.initChildButton(editToolBar1, PropertyType.ADD_ICON.toString(), PropertyType.ADD_ITEM_TOOLTIP.toString(), false);
       removeImage = gui.initChildButton(editToolBar1, PropertyType.REMOVE_ICON.toString(), PropertyType.REMOVE_ITEM_TOOLTIP.toString(), true);
@@ -156,10 +170,10 @@ public class Workspace extends AppWorkspaceComponent{
       TablePane.getChildren().add(editToolBar2);
       regionTable = new TableView();   
       mapLabel = new Label(DEFAULT_STRING);
-      mapLabel.setLayoutX(app.getGUI().getPrimaryScene().getWidth()/8);
+     
         
        // NOW SETUP THE TABLE COLUMN
-        mapPane.getChildren().add(mapLabel);
+        
         regionColumn = new TableColumn(props.getProperty(PropertyType.SUBREGION_NAME));
         capitalColumn = new TableColumn(props.getProperty(PropertyType.CAPITAL));
         leaderColumn = new TableColumn(props.getProperty(PropertyType.LEADER_NAME));
@@ -170,7 +184,7 @@ public class Workspace extends AppWorkspaceComponent{
         regionTable.getColumns().add(regionColumn);
         regionTable.getColumns().add(capitalColumn);
         regionTable.getColumns().add(leaderColumn);
-        regionTable.setMinHeight((app.getGUI().getPrimaryScene().getHeight()-(editToolBar2.getHeight()+editToolBar1.getHeight()+250)));
+        regionTable.setMinHeight((app.getGUI().getPrimaryScene().getHeight()));
        DataManager dataManager = (DataManager)app.getDataComponent();
        regionTable.setItems(dataManager.getRegion());
        TablePane.getChildren().add(regionTable);
@@ -182,6 +196,26 @@ public class Workspace extends AppWorkspaceComponent{
   }
     @Override
     public void reloadWorkspace() {
+       polygonPane = new Pane();
+       clipPane = new Pane();
+
+       DataManager data = (DataManager)app.getDataComponent();
+       double x = data.getDimensionW();
+       double y = data.getDimensionH();
+       Rectangle clip = new Rectangle(0,0,x,y);
+       clipPane.setClip(clip);
+       Rectangle back = new Rectangle(0,0,x,y);
+       clipPane.getChildren().add(back);
+       Color background = data.getBackgroundColor();
+       mapPane.getChildren().add(clipPane);
+       back.setFill(background);
+       drawPolygon();
+       redrawImage();
+   
+       workspace.getItems().addAll(mapPane,TablePane);
+//       
+       app.getGUI().getAppPane().setCenter(workspace);
+       done = true;
        
     }
 
@@ -211,7 +245,7 @@ public class Workspace extends AppWorkspaceComponent{
         rename.getStyleClass().add(CLASS_DIMENSION);
         reassign.getStyleClass().add(CLASS_BUTTON);
         mapPane.getStyleClass().add(CLASS_MAP_PANE);
-        testing();
+        
        
 //        
    
@@ -239,6 +273,9 @@ public class Workspace extends AppWorkspaceComponent{
       });
       rename.setOnAction(e -> {
           control.processRename();
+      });
+      mapPane.setOnMouseClicked(e-> {
+        
       });
         
     }
@@ -269,6 +306,67 @@ public class Workspace extends AppWorkspaceComponent{
 //       
        app.getGUI().getAppPane().setCenter(workspace);
          
+    }
+
+    public void redrawImage() {
+         DataManager data = (DataManager)app.getDataComponent();
+         imagePane = new Pane();
+           for(int i=0;i<data.getImages().size();i++){
+               String url = data.getImages().get(i);
+               System.out.println(url);
+               double locX = data.getLocation().get(i).getX();
+               double locY = data.getLocation().get(i).getY();
+               Image image = new Image(url);
+               ImageView imageV = new ImageView(image);
+               imageV.setLayoutX(locX);
+               imageV.setLayoutY(locY);
+          imagePane.getChildren().add(imageV);
+        }
+        clipPane.getChildren().add(imagePane);
+           
+    }
+
+    public void drawPolygon() {
+       
+           DataManager data = (DataManager) app.getDataComponent();
+          ArrayList<ArrayList<Point2D>> polygon = data.getPoly();
+          double avgX=0; double avgY=0; double m=0;
+           for(int j=0;j<polygon.size();j++){
+              ArrayList<Point2D> points = polygon.get(j);
+               poly = new Polygon();
+           for(int i=0;i<points.size();i++){
+               poly.getPoints().addAll(points.get(i).getX(),points.get(i).getY());
+               m++;
+               avgX+=points.get(i).getX();
+               avgY += points.get(i).getY();
+              }
+
+              int red = data.getRegion().get(j).getR();
+              int green = data.getRegion().get(j).getG();
+              int blue = data.getRegion().get(j).getB();
+              Color c =  Color.rgb(red,green,blue);
+              double thick = data.getThickness();
+              poly.setStroke(Paint.valueOf("Black"));
+              poly.setFill(c);
+              poly.setStrokeWidth(1/100);
+            polygonPane.getChildren().add(poly);
+             
+              
+      } 
+           double X = avgX/m;
+           double Y = avgY/m;
+           double scale = data.getScale();
+               polygonPane.setLayoutX((polygonPane.getLayoutX()+(802/2-X))*800);
+               polygonPane.setLayoutY((polygonPane.getLayoutY()+(536/2-Y))*800);
+               polygonPane.setScaleX(polygonPane.getScaleX()*800);
+               polygonPane.setScaleY(polygonPane.getScaleY()*800);
+           
+           polygonPane.setPrefSize(802, 536);
+           
+            polygonPane.requestLayout();
+            
+           clipPane.getChildren().add(polygonPane);
+          
     }
     
 }
