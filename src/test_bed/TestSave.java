@@ -42,25 +42,40 @@ import static saf.settings.AppStartupConstants.PATH_IMAGES;
 
 
 public class TestSave {
-    static DataManager data ;
+   public static DataManager data ;
  
       
     
     public static void main(String[] args) throws IOException{
-     createAndorra();
-     save();    
+        save("SM");
+        save("A");
+        save("S");
     }
-    public static void save() throws FileNotFoundException, IOException{
-         String filePath = "./HW5SampleData/work/testing";
+    public static void save(String s) throws FileNotFoundException, IOException{
+        String filePath = null;
+        if(s.equals("A")){
+            createAndorra();
+            filePath = "./HW5SampleData/work/Andorra.json";
+        }
+        else if(s.equals("SM")){
+             createSanMarino();
+              filePath = "./HW5SampleData/work/SanMarino.json";
+        }
+         else if(s.equals("S")){
+            createSlovakia();
+             filePath = "./HW5SampleData/work/Slovakia.json";
+        }
+         
          FileManager file = new FileManager();
          file.saveData(data, filePath);
+         
          
          
          
     }
     public  static void createAndorra(){
         data = new DataManager();
-        data.setfilePath("./raw_map_data/Andorra.json");
+        data.setfilePath("./HW5SampleData/raw_map_data/Andorra.json");
         Subregion a = new Subregion("Orgino","Ordino (town)","Ventura Espot");
         Subregion b = new Subregion("Canillo","Canillo (town)","Enric Casadevall Medrano");
         Subregion c = new Subregion("Encamp","Encamp (town)","Miquel Alís Font");
@@ -79,26 +94,29 @@ public class TestSave {
         data.setBackgroundColor(Color.ORANGE);
         data.setBorderColor(Color.BLACK);
         data.setScale(1.5);
-        data.setThickness(0.75);
-        String flagPath = "file:" + "./Europe/" + "Andorra Flag.png";
+        data.setThickness(1/100);
+        String flagPath = "file:" + "./HW5SampleData/export/The World/Europe/" + "Andorra Flag.png";
+        String flagPath2 = "file:" + "./HW5SampleData/export/The World/Europe/" + "Andorra.png";
         data.addImages(flagPath);
+         Point2D location2 = new Point2D(12,9);
         Point2D location = new Point2D(580,390);
         data.addLocation(location);
+        data.addLocation(location2);
         data.setDimensionW(802);
         data.setDimensionH(536);
       }
     public  static void createSanMarino(){
         data = new DataManager();
-      data.setfilePath("./raw_map_data/San Marino.json");
-        Subregion a = new Subregion("Acquaviva",null,"Lucia Tamagnini");
-        Subregion b = new Subregion("Borgo Maggiore",null,"Sergio Nanni");
-        Subregion c = new Subregion("Chiesanuova",null,"Franco Santi");
-        Subregion d = new Subregion("Domagnano",null,"Gabriel Guidi");
-        Subregion e = new Subregion("Faetano",null,"Pier Mario Bedetti");
-        Subregion f = new Subregion("Fiorentino",null,"Gerri Fabbri");
-        Subregion g = new Subregion("Montegiardino",null,"Marta Fabbri");
-        Subregion h = new Subregion("City of San Marino",null,"Maria Teresa Beccari");
-        Subregion i = new Subregion("Serravalle",null,"Leandro Maiani");
+      data.setfilePath("./HW5SampleData/raw_map_data/San Marino.json");
+        Subregion a = new Subregion("Acquaviva","null","Lucia Tamagnini");
+        Subregion b = new Subregion("Borgo Maggiore","null","Sergio Nanni");
+        Subregion c = new Subregion("Chiesanuova","null","Franco Santi");
+        Subregion d = new Subregion("Domagnano","null","Gabriel Guidi");
+        Subregion e = new Subregion("Faetano","null","Pier Mario Bedetti");
+        Subregion f = new Subregion("Fiorentino","null","Gerri Fabbri");
+        Subregion g = new Subregion("Montegiardino","null","Marta Fabbri");
+        Subregion h = new Subregion("City of San Marino","null","Maria Teresa Beccari");
+        Subregion i = new Subregion("Serravalle","null","Leandro Maiani");
         a.setR(225);a.setG(225);a.setB(225);
         b.setR(200);b.setG(200);b.setB(200);
         c.setR(175);c.setG(175);c.setB(175);
@@ -114,21 +132,21 @@ public class TestSave {
         data.setBackgroundColor(Color.ORANGE);
         data.setBorderColor(Color.BLACK);
         data.setScale(1.5);
-        data.setThickness(0.75);
+        data.setThickness(1/100);
         data.setDimensionW(802);
         data.setDimensionH(536);
       }
      public  static void createSlovakia(){
         data = new DataManager();
-      data.setfilePath("./raw_map_data/Slovakia.json");
-        Subregion a = new Subregion("Bratislava",null,null);
-        Subregion b = new Subregion("Trnava",null,null);
-        Subregion c = new Subregion("Trencin",null,null);
-        Subregion d = new Subregion("Nitra",null,null);
-        Subregion e = new Subregion("Zilina",null,null);
-        Subregion f = new Subregion("Banska Bystrica",null,null);
-        Subregion g = new Subregion("Presov",null,null);
-        Subregion h = new Subregion("Kosice",null,null);
+      data.setfilePath("./HW5SampleData/raw_map_data/Slovakia.json");
+        Subregion a = new Subregion("Bratislava","null","null");
+        Subregion b = new Subregion("Trnava","null","null");
+        Subregion c = new Subregion("Trencin","null","null");
+        Subregion d = new Subregion("Nitra","null","null");
+        Subregion e = new Subregion("Zilina","null","null");
+        Subregion f = new Subregion("Banska Bystrica","null","null");
+        Subregion g = new Subregion("Presov","null","null");
+        Subregion h = new Subregion("Kosice","null","null");
         
         a.setR(250);a.setG(250);a.setB(250);
         b.setR(249);b.setG(249);b.setB(249);
@@ -141,10 +159,15 @@ public class TestSave {
        
         
         data.addRegion(a);data.addRegion(b);data.addRegion(c);data.addRegion(d);data.addRegion(e);data.addRegion(f);data.addRegion(g);data.addRegion(h);
-       
+       Point2D location = new Point2D(540,365);
+       Point2D location2 = new Point2D(25,25);
+        data.addLocation(location);data.addLocation(location2);
+       String flagPath = "file:" + "./HW5SampleData/export/The World/Europe/" + "Slovakia Flag.png";
+       String flagPath2 = "file:" + "./HW5SampleData/export/The World/Europe/" + "Slovenian Flag.png";
+       data.addImages(flagPath);data.addImages(flagPath2);
         data.setBackgroundColor(Color.ORANGE);
         data.setBorderColor(Color.BLACK);
-        data.setScale(1.5);
+        data.setScale(50);
         data.setThickness(0.75);
         data.setDimensionW(802);
         data.setDimensionH(536);
