@@ -75,8 +75,9 @@ public class TestSave {
     }
     public  static void createAndorra(){
         data = new DataManager();
+        data.setName("Andorra");
         data.setfilePath("./HW5SampleData/raw_map_data/Andorra.json");
-        Subregion a = new Subregion("Orgino","Ordino (town)","Ventura Espot");
+        Subregion a = new Subregion("Ordino","Ordino (town)","Ventura Espot");
         Subregion b = new Subregion("Canillo","Canillo (town)","Enric Casadevall Medrano");
         Subregion c = new Subregion("Encamp","Encamp (town)","Miquel Alís Font");
         Subregion d = new Subregion("Escaldes-Engordany","Escaldes-Engordany (town)","Montserrat Capdevila Pallarés");
@@ -93,11 +94,11 @@ public class TestSave {
         data.addRegion(a);data.addRegion(b);data.addRegion(c);data.addRegion(d);data.addRegion(e);data.addRegion(f);data.addRegion(g);
         data.setBackgroundColor(Color.ORANGE);
         data.setBorderColor(Color.BLACK);
-        data.setScale(1.5);
-        data.setThickness(1/100);
+        data.setScale(600);
+        data.setThickness(0.001);
         String flagPath = "file:" + "./HW5SampleData/export/The World/Europe/" + "Andorra Flag.png";
         String flagPath2 = "file:" + "./HW5SampleData/export/The World/Europe/" + "Andorra.png";
-        data.addImages(flagPath);
+        data.addImages(flagPath);data.addImages(flagPath2);
          Point2D location2 = new Point2D(12,9);
         Point2D location = new Point2D(580,390);
         data.addLocation(location);
@@ -107,6 +108,7 @@ public class TestSave {
       }
     public  static void createSanMarino(){
         data = new DataManager();
+        data.setName("San Marino");
       data.setfilePath("./HW5SampleData/raw_map_data/San Marino.json");
         Subregion a = new Subregion("Acquaviva","null","Lucia Tamagnini");
         Subregion b = new Subregion("Borgo Maggiore","null","Sergio Nanni");
@@ -131,13 +133,14 @@ public class TestSave {
         data.addRegion(i);
         data.setBackgroundColor(Color.ORANGE);
         data.setBorderColor(Color.BLACK);
-        data.setScale(1.5);
-        data.setThickness(1/100);
+        data.setScale(1000);
+        data.setThickness(0.001);
         data.setDimensionW(802);
         data.setDimensionH(536);
       }
      public  static void createSlovakia(){
         data = new DataManager();
+        data.setName("Slovakia");
       data.setfilePath("./HW5SampleData/raw_map_data/Slovakia.json");
         Subregion a = new Subregion("Bratislava","null","null");
         Subregion b = new Subregion("Trnava","null","null");
@@ -168,7 +171,7 @@ public class TestSave {
         data.setBackgroundColor(Color.ORANGE);
         data.setBorderColor(Color.BLACK);
         data.setScale(50);
-        data.setThickness(0.75);
+        data.setThickness(0.01);
         data.setDimensionW(802);
         data.setDimensionH(536);
       }

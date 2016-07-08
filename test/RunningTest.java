@@ -66,16 +66,16 @@ public class RunningTest {
         
         
        
-        
+      assertEquals("Andorra",load.getName());
       assertEquals("./HW5SampleData/raw_map_data/Andorra.json", load.getfilePath());
       System.out.println("The path are equal");
       assertEquals("0xffa500ff", load.getBackgroundColor().toString());
       System.out.println("The background are equal");
       assertEquals("0x000000ff", load.getBorderColor().toString());
       System.out.println("The border are equal");
-      assertEquals(1.5, load.getScale(),0);
+      assertEquals(600, load.getScale(),0);
       System.out.println("The scale are equal");
-      assertEquals(0.75, load.getThickness(),0);
+      assertEquals(0.001, load.getThickness(),0);
       System.out.println("The thickness are equal");
        assertEquals(580, load.getLocation().get(0).getX(),0);
       System.out.println("The points x are the same");
@@ -96,7 +96,7 @@ public class RunningTest {
           int greenl = s.getG();
           int bluel = s.getB();
           
-          assertEquals("Orgino",rl);
+          assertEquals("Ordino",rl);
           assertEquals("Ordino (town)",cl);
           assertEquals("Ventura Espot",ll); 
           assertEquals(200,redl,0); 
@@ -114,16 +114,16 @@ public class RunningTest {
        TestSave.save("SM");
        TestLoad.load("SM");
         load = TestLoad.data;
-        
+      assertEquals("San Marino",load.getName());
       assertEquals("./HW5SampleData/raw_map_data/San Marino.json", load.getfilePath());
       System.out.println("The path are equal");
       assertEquals("0xffa500ff", load.getBackgroundColor().toString());
       System.out.println("The background are equal");
       assertEquals("0x000000ff", load.getBorderColor().toString());
       System.out.println("The border are equal");
-      assertEquals(1.5, load.getScale(),0);
+      assertEquals(1000, load.getScale(),0);
       System.out.println("The scale are equal");
-      assertEquals(0.75, load.getThickness(),0);
+      assertEquals(0.001, load.getThickness(),0);
       System.out.println("The thickness are equal");
       System.out.println("The points y are the same");
        assertEquals(802, load.getDimensionW(),0);
@@ -155,16 +155,16 @@ public void testSlovakia() throws IOException{
        TestLoad.load("S");
         load = TestLoad.data;
         
-        
+      assertEquals("Slovakia",load.getName()); 
       assertEquals("./HW5SampleData/raw_map_data/Slovakia.json", load.getfilePath());
       System.out.println("The path are equal");
       assertEquals("0xffa500ff", load.getBackgroundColor().toString());
       System.out.println("The background are equal");
       assertEquals("0x000000ff", load.getBorderColor().toString());
       System.out.println("The border are equal");
-      assertEquals(1.5, load.getScale(),0);
+      assertEquals(50, load.getScale(),0);
       System.out.println("The scale are equal");
-      assertEquals(0.75, load.getThickness(),0);
+      assertEquals(0.01, load.getThickness(),0);
       System.out.println("The thickness are equal");
        assertEquals(540, load.getLocation().get(0).getX(),0);
       System.out.println("The points x are the same");

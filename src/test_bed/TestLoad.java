@@ -32,7 +32,8 @@ public class TestLoad {
     public static DataManager data;
     
     public static void main(String[] args) throws IOException{
-        load("S");
+        load("A");
+        System.out.println(data.isFlagExist(data.getName()));
     }
 
 public static void load(String s) throws IOException{
@@ -49,6 +50,7 @@ public static void load(String s) throws IOException{
 data = new DataManager();
  FileManager file = new FileManager();
  file.loadData(data, filePath);
+ System.out.println(data.getName());
 System.out.println(data.getfilePath());
 System.out.println(data.getBackgroundColor());
 System.out.println(data.getBorderColor());

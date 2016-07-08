@@ -136,6 +136,8 @@ public class Workspace extends AppWorkspaceComponent{
         
     }
   private void layoutGUI(){
+    
+       clipPane = new Pane();
        PropertiesManager props = PropertiesManager.getPropertiesManager();
       TablePane = new VBox();
       editToolBar1 = new HBox();
@@ -196,9 +198,10 @@ public class Workspace extends AppWorkspaceComponent{
   }
     @Override
     public void reloadWorkspace() {
-       polygonPane = new Pane();
-       clipPane = new Pane();
-
+       workspace.getItems().clear();
+       clipPane.getChildren().clear();
+       mapPane.getChildren().clear();
+       
        DataManager data = (DataManager)app.getDataComponent();
        double x = data.getDimensionW();
        double y = data.getDimensionH();
@@ -209,13 +212,14 @@ public class Workspace extends AppWorkspaceComponent{
        Color background = data.getBackgroundColor();
        mapPane.getChildren().add(clipPane);
        back.setFill(background);
-       drawPolygon();
-       redrawImage();
-   
+       polygonPane = drawPolygon();
+       imagePane = redrawImage();
+       clipPane.getChildren().addAll(polygonPane,imagePane);
        workspace.getItems().addAll(mapPane,TablePane);
 //       
        app.getGUI().getAppPane().setCenter(workspace);
        done = true;
+       System.out.println(data.isFlagExist(data.getName()));
        
     }
 
@@ -280,56 +284,31 @@ public class Workspace extends AppWorkspaceComponent{
         
     }
 
-    private void testing() {
-           Pane pane = new Pane();
-           Pane p = new Pane();
-          
-           
-           Rectangle rec = new Rectangle(app.getGUI().getPrimaryScene().getWidth()/2-30,500);
-           p.setClip(rec);
-           Rectangle r = new Rectangle(app.getGUI().getPrimaryScene().getWidth()/2-30,500);
-           r.setFill(Paint.valueOf("blue"));
-           Circle c  = new  Circle(100,50,70);
-          c.setFill(Paint.valueOf("green"));
-          Circle c1  = new  Circle(200,300,70);
-          c1.setFill(Paint.valueOf("green"));
-           mapPane.getChildren().add(p);
-           pane.getChildren().add(r);
-           pane.getChildren().addAll(c,c1);
-           p.getChildren().add(pane);
-            DataManager data = (DataManager) app.getDataComponent();
-            Subregion test = new Subregion("Taiwan","Taipei","Tsai");
-            data.addRegion(test);
-           
-            
-       workspace.getItems().addAll(mapPane,TablePane);
-//       
-       app.getGUI().getAppPane().setCenter(workspace);
-         
-    }
-
-    public void redrawImage() {
+   
+    public Pane redrawImage() {
+     Pane    imagePane = new Pane();
          DataManager data = (DataManager)app.getDataComponent();
-         imagePane = new Pane();
            for(int i=0;i<data.getImages().size();i++){
                String url = data.getImages().get(i);
-               System.out.println(url);
+               
                double locX = data.getLocation().get(i).getX();
                double locY = data.getLocation().get(i).getY();
+               
                Image image = new Image(url);
                ImageView imageV = new ImageView(image);
                imageV.setLayoutX(locX);
                imageV.setLayoutY(locY);
           imagePane.getChildren().add(imageV);
         }
-        clipPane.getChildren().add(imagePane);
+        return imagePane;
            
     }
 
-    public void drawPolygon() {
-       
+    public Pane drawPolygon() {
+        Pane   polygonPane = new Pane();
            DataManager data = (DataManager) app.getDataComponent();
           ArrayList<ArrayList<Point2D>> polygon = data.getPoly();
+         
           double avgX=0; double avgY=0; double m=0;
            for(int j=0;j<polygon.size();j++){
               ArrayList<Point2D> points = polygon.get(j);
@@ -340,7 +319,6 @@ public class Workspace extends AppWorkspaceComponent{
                avgX+=points.get(i).getX();
                avgY += points.get(i).getY();
               }
-
               int red = data.getRegion().get(j).getR();
               int green = data.getRegion().get(j).getG();
               int blue = data.getRegion().get(j).getB();
@@ -348,24 +326,23 @@ public class Workspace extends AppWorkspaceComponent{
               double thick = data.getThickness();
               poly.setStroke(Paint.valueOf("Black"));
               poly.setFill(c);
-              poly.setStrokeWidth(1/100);
-            polygonPane.getChildren().add(poly);
+              
+              poly.setStrokeWidth(thick);
+              polygonPane.getChildren().add(poly);
              
               
       } 
            double X = avgX/m;
            double Y = avgY/m;
            double scale = data.getScale();
-               polygonPane.setLayoutX((polygonPane.getLayoutX()+(802/2-X))*800);
-               polygonPane.setLayoutY((polygonPane.getLayoutY()+(536/2-Y))*800);
-               polygonPane.setScaleX(polygonPane.getScaleX()*800);
-               polygonPane.setScaleY(polygonPane.getScaleY()*800);
+               polygonPane.setLayoutX((polygonPane.getLayoutX()+(802/2-X))*scale);
+               polygonPane.setLayoutY((polygonPane.getLayoutY()+(536/2-Y))*scale);
+               polygonPane.setScaleX(polygonPane.getScaleX()*scale);
+               polygonPane.setScaleY(polygonPane.getScaleY()*scale);
            
-           polygonPane.setPrefSize(802, 536);
-           
-            polygonPane.requestLayout();
-            
-           clipPane.getChildren().add(polygonPane);
+           polygonPane.setPrefSize(802, 536); 
+           polygonPane.requestLayout();
+           return polygonPane;   
           
     }
     

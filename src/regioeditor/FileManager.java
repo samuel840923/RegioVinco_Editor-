@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +41,7 @@ import saf.components.AppFileComponent;
  * @author samuelchen
  */
 public class FileManager implements AppFileComponent{
+    static final String JSON_COUNTRY_NAME = "country name";
     static final String JSON_FILEPATH = "geometricFilePath";
     static final String JSON_BACKGROUND_COLOR = "backgroundcolor";
     static final String JSON_BORDER_COLOR = "bordercolor";
@@ -117,6 +119,7 @@ public class FileManager implements AppFileComponent{
         JsonArray imageArray = arrayBuilder2.build();
        
         JsonObject dataManagerJSO = Json.createObjectBuilder()
+                 .add(JSON_COUNTRY_NAME, data.getName())
 		.add(JSON_FILEPATH, data.getfilePath())
                 .add(JSON_BACKGROUND_COLOR, data.getBackgroundColor().toString())
 		.add(JSON_BORDER_COLOR, data.getBorderColor().toString())
@@ -152,7 +155,9 @@ public class FileManager implements AppFileComponent{
     public void loadData(AppDataComponent datas, String filePath) throws IOException {
 //        Progress p = new Progress();
          DataManager data = (DataManager)datas;
+         data.reset();
         JsonObject json = loadJSONFile(filePath);
+    String countryName = json.getString(JSON_COUNTRY_NAME);
     String geoFile = json.getString(JSON_FILEPATH);
     loadGeometric(data,geoFile);
     String backgroundcolor = json.getString(JSON_BACKGROUND_COLOR);
@@ -162,6 +167,7 @@ public class FileManager implements AppFileComponent{
     double dW = getDataAsDouble(json,JSON_DIMENSION_W);
     double dH = getDataAsDouble(json,JSON_DIMENSION_H);
     data.setfilePath(geoFile);
+    data.setName(countryName);
     Color background = Color.valueOf(backgroundcolor);
     Color border = Color.valueOf(borderColor);
     data.setBackgroundColor(background);
@@ -200,8 +206,26 @@ done = true;
     
 
     @Override
-    public void exportData(AppDataComponent data, String filePath) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void exportData(AppDataComponent datas, String filePath) throws IOException {
+        DataManager data = (DataManager)datas;
+        String path = filePath+data.getName()+".rvm";
+        
+//        Map<String, Object> properties = new HashMap<>(1);
+//	properties.put(JsonGenerator.PRETTY_PRINTING, true);
+//	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+//	StringWriter sw = new StringWriter();
+//	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+//	jsonWriter.writeObject(dataManagerJSO);
+//	jsonWriter.close();
+//
+//	// INIT THE WRITER
+//	OutputStream os = new FileOutputStream(filePath);
+//	JsonWriter jsonFileWriter = Json.createWriter(os);
+//	jsonFileWriter.writeObject(dataManagerJSO);
+//	String prettyPrinted = sw.toString();
+//	PrintWriter pw = new PrintWriter(filePath);
+//	pw.write(prettyPrinted);
+//	pw.close();
     }
 
     @Override
@@ -214,16 +238,19 @@ done = true;
         // num of region
         JsonArray SubRegion = json.getJsonArray(JSON_SUBREGION);
         // get the size of the screen
-       
+     
              //
         for(int i =0; i<SubRegion.size();i++){
            JsonObject Sub_Region_Poly = SubRegion.getJsonObject(i);
            int numOfPoly = getDataAsInt(Sub_Region_Poly,JSON_NUMBER_OF_SUBREGION_POLYGONS);
+           
            JsonArray SubPolyRegion = Sub_Region_Poly.getJsonArray(JSON_SUBREGION_POLYGONS);
+          
            //# of poly
+            points = new ArrayList<Point2D>();
            for (int j =0;j<SubPolyRegion.size();j++){
            JsonArray  coordinate = SubPolyRegion.getJsonArray(j); 
-           points = new ArrayList<Point2D>();
+          
            //XY
            for (int k = 0;k<coordinate.size() ;k++){
                JsonObject coor = coordinate.getJsonObject(k);
@@ -240,8 +267,9 @@ done = true;
                Point2D point = new Point2D(X,Y);
                points.add(point);
               }
-           dataManager.addGeo(points);
+          
           }
+             dataManager.addGeo(points);
         }
         
         

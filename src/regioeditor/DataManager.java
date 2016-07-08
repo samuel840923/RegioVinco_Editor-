@@ -1,6 +1,7 @@
 package regioeditor;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -29,6 +30,7 @@ import saf.components.AppDataComponent;
     Double borderThickness;
     Double paneScale;
     String geometricFile;
+    String regionName;
     // NAME OF THE TODO LIST
     StringProperty name;
     
@@ -56,7 +58,7 @@ import saf.components.AppDataComponent;
     public DataManager(AppTemplate initApp) throws Exception {
 	// KEEP THE APP FOR LATER
 	app = initApp;
-        FXCollections.observableArrayList();
+        
          images = new ArrayList<String>();
         imageLocation = new ArrayList<Point2D>();
         polygonXY =  new ArrayList<ArrayList<Point2D>>();
@@ -69,6 +71,12 @@ import saf.components.AppDataComponent;
         
       
         
+    }
+    public void setName(String s){
+        regionName =s;
+    }
+    public String getName(){
+        return regionName;
     }
     public void addGeo(ArrayList<Point2D> poly){
         polygonXY.add(poly);
@@ -135,7 +143,11 @@ import saf.components.AppDataComponent;
 
     @Override
     public void reset() {
-       
+         images = new ArrayList<String>();
+        imageLocation = new ArrayList<Point2D>();
+        polygonXY =  new ArrayList<ArrayList<Point2D>>();
+        region.clear();
+         FXCollections.observableArrayList();
     }
     public ObservableList<Subregion> getRegion(){
         return region;
@@ -145,6 +157,25 @@ import saf.components.AppDataComponent;
     }
     public ArrayList<ArrayList<Point2D>> getPoly(){
         return polygonXY;
+    }
+    public boolean isCapitalExist(){
+        for(int i =0;i<region.size();i++){
+            if(region.get(i).getCapital().equals("null"))
+                return false;
+        }
+       return true;
+    }
+    public boolean isFlagExist(String name){
+        for(int i =0;i<region.size();i++){
+            String dir = "./HW5SampleData/export/The World/Europe/"+name+"/";
+            String flag = region.get(i).getName()+" Flag.png";
+            System.out.println(dir+flag);
+            File file = new File(dir+flag);
+            if(!(file.exists()))
+                return false;
+               
+        }
+       return true;
     }
     }
     

@@ -1,15 +1,16 @@
 
 {
+    "country name":"Andorra",
     "geometricFilePath":"./HW5SampleData/raw_map_data/Andorra.json",
     "backgroundcolor":"0xffa500ff",
     "bordercolor":"0x000000ff",
-    "paneScale":1.5,
-    "thickness":0.0,
+    "paneScale":600.0,
+    "thickness":0.001,
     "dimensionW":802.0,
     "dimensionH":536.0,
     "Subregion":[
         {
-            "region":"Orgino",
+            "region":"Ordino",
             "capital":"Ordino (town)",
             "leader":"Ventura Espot",
             "red":200,
@@ -78,6 +79,9 @@
     "image url":[
         {
             "image":"file:./HW5SampleData/export/The World/Europe/Andorra Flag.png"
+        },
+        {
+            "image":"file:./HW5SampleData/export/The World/Europe/Andorra.png"
         }
     ]
 }
