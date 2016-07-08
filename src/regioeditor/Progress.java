@@ -5,7 +5,7 @@
  */
 package regioeditor;
 
-import com.apple.eio.FileManager;
+
 import java.util.concurrent.locks.ReentrantLock;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -47,10 +47,9 @@ public class Progress extends Stage{
         HBox toolbar = new HBox();
         bar = new ProgressBar(0);      
        
-        toolbar.getChildren().add(bar);
-       
+        toolbar.getChildren().add(bar);   
         
-        button = new Button("Restart");
+        button = new Button("Close");
         processLabel = new Label();
         processLabel.setFont(new Font("Serif", 36));
         box.getChildren().add(toolbar);
@@ -59,7 +58,9 @@ public class Progress extends Stage{
         
         scene = new Scene(box);
         this.setScene(scene);
-
+        button.setOnAction(e->{
+            close();
+        });
         
                 Task<Void> task = new Task<Void>() {
                     int task = numTasks++;
@@ -69,28 +70,28 @@ public class Progress extends Stage{
                     protected Void call() throws Exception {
                         try {
                             progressLock.lock();
-                        for (int i = 0; i < 200; i++) {
-                            perc = i/max;
-                            
-                            
+                       
                             // THIS WILL BE DONE ASYNCHRONOUSLY VIA MULTITHREADING
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
 				    // WHAT'S MISSING HERE?
+                                    if(FileManager.done = true){
+                                         bar.setProgress(.5);
+                                          processLabel.setText((50)+"%");  
+                                    }
                                     if(Workspace.done = true){
                                         bar.setProgress(1);
+                                         processLabel.setText((100)+"%");  
                                     }
                                     else
                                     bar.setProgress(perc);
-                              
-                                    processLabel.setText("Task #" + task);
                                 }
                             });
 
                             // SLEEP EACH FRAME
                             Thread.sleep(10);
-                        }}
+                        }
                         finally {
 			    // WHAT DO WE NEED TO DO HERE?
                             progressLock.unlock();

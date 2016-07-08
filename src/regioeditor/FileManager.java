@@ -75,7 +75,7 @@ public class FileManager implements AppFileComponent{
     static final String EXPORT_JSON_SUBREGIONS_HAVE_FLAGS = "subregions_have_flags";
     static final String EXPORT_JSON_SUBREGIONS_HAVE_LEADERS = "subregions_have_leaders";
     static final String EXPORT_JSON_SUBREGIONS = "subregions";
-    static boolean done = false;
+   public static boolean done = false;
 
     @Override
     public void saveData(AppDataComponent datas, String filePath) throws IOException {
@@ -159,9 +159,10 @@ public class FileManager implements AppFileComponent{
 
     @Override
     public void loadData(AppDataComponent datas, String filePath) throws IOException {
-//        Progress p = new Progress();
+        done = false;
          DataManager data = (DataManager)datas;
-         data.reset();
+        data.reset();
+        Progress p = new Progress();
         JsonObject json = loadJSONFile(filePath);
     String countryName = json.getString(JSON_COUNTRY_NAME);
     String geoFile = json.getString(JSON_FILEPATH);

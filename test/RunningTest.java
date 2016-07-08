@@ -65,7 +65,8 @@ public class RunningTest {
         load = TestLoad.data;
         
         
-       
+      String[] countryList = {"Ordino","Canillo","Encamp","Escaldes-Engordany","La Massana",
+          "Andorra la Vella","Sant Julia de Loria"};
       assertEquals("Andorra",load.getName());
       assertEquals("./HW5SampleData/raw_map_data/Andorra.json", load.getfilePath());
       System.out.println("The path are equal");
@@ -85,23 +86,10 @@ public class RunningTest {
        System.out.println("The dimension x are the same");
        assertEquals(536, load.getDimensionH(),0);
        System.out.println("The dimension y  are the same");
-      
-     
-          
-          Subregion s = load.getRegion().get(0);
-          String rl = s.getName();
-          String cl = s.getCapital();
-          String ll = s.getLeader();
-          int redl = s.getR();
-          int greenl = s.getG();
-          int bluel = s.getB();
-          
-          assertEquals("Ordino",rl);
-          assertEquals("Ordino (town)",cl);
-          assertEquals("Ventura Espot",ll); 
-          assertEquals(200,redl,0); 
-          assertEquals(200,greenl,0);
-          assertEquals(200,bluel,0);
+      for(int i=0;i<countryList.length;i++){
+           assertEquals(countryList[i], load.getRegion().get(i).getName());
+      }
+        
    
       
       System.out.println("The region are the same");
@@ -114,6 +102,9 @@ public class RunningTest {
        TestSave.save("SM");
        TestLoad.load("SM");
         load = TestLoad.data;
+        String[] countryList = {"Acquaviva","Borgo Maggiore","Chiesanuova","Domagnano","Faetano"
+                ,"Fiorentino","Montegiardino","City of San Marino","Serravalle"};
+        
       assertEquals("San Marino",load.getName());
       assertEquals("./HW5SampleData/raw_map_data/San Marino.json", load.getfilePath());
       System.out.println("The path are equal");
@@ -130,31 +121,19 @@ public class RunningTest {
        System.out.println("The dimension x are the same");
        assertEquals(536, load.getDimensionH(),0);
        System.out.println("The dimension y  are the same");
-     
-          Subregion s = load.getRegion().get(0);
-          String rl = s.getName();
-          String cl = s.getCapital();
-          String ll = s.getLeader();
-          int redl = s.getR();
-          int greenl = s.getG();
-          int bluel = s.getB();
-     
-          assertEquals("Acquaviva",rl);
-          assertEquals("null",cl);
-          assertEquals("Lucia Tamagnini",ll); 
-          assertEquals(225,redl,0); 
-          assertEquals(225,greenl,0);
-          assertEquals(225,bluel,0);
-   
-      System.out.println("The region are the same");
-}
+      for(int i=0;i<countryList.length;i++){
+           assertEquals(countryList[i], load.getRegion().get(i).getName());
+      }
+   }
    @Test
 public void testSlovakia() throws IOException{
      TestSave.createSlovakia();
        TestSave.save("S");
        TestLoad.load("S");
         load = TestLoad.data;
-        
+        String[] countryList = {"Bratislava","Trnava","Trencin","Nitra","Zilina","Banska Bystrica",
+            "Presov","Kosice"
+        };
       assertEquals("Slovakia",load.getName()); 
       assertEquals("./HW5SampleData/raw_map_data/Slovakia.json", load.getfilePath());
       System.out.println("The path are equal");
@@ -179,24 +158,9 @@ public void testSlovakia() throws IOException{
        assertEquals(536, load.getDimensionH(),0);
        System.out.println("The dimension y  are the same");
           
-          Subregion s = load.getRegion().get(0);
-          String rl = s.getName();
-          String cl = s.getCapital();
-          String ll = s.getLeader();
-          int redl = s.getR();
-          int greenl = s.getG();
-          int bluel = s.getB();
-          
-          assertEquals("Bratislava",rl);
-          assertEquals("null",cl);
-          assertEquals("null",ll); 
-          assertEquals(250,redl,0); 
-          assertEquals(250,greenl,0);
-          assertEquals(250,bluel,0);
-   
-      
-      System.out.println("The region are the same");
-      
+       for(int i=0;i<countryList.length;i++){
+           assertEquals(countryList[i], load.getRegion().get(i).getName());
+      }
     
 }
 }

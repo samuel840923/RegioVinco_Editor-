@@ -30,6 +30,7 @@ import javax.json.stream.JsonGenerator;
 import regioeditor.DataManager;
 import regioeditor.FileManager;
 import regioeditor.Subregion;
+import saf.components.AppDataComponent;
 import static saf.settings.AppStartupConstants.FILE_PROTOCOL;
 import static saf.settings.AppStartupConstants.PATH_IMAGES;
 
@@ -42,6 +43,26 @@ import static saf.settings.AppStartupConstants.PATH_IMAGES;
 
 
 public class TestSave {
+     static final String JSON_COUNTRY_NAME = "country name";
+    static final String JSON_FILEPATH = "geometricFilePath";
+    static final String JSON_BACKGROUND_COLOR = "backgroundcolor";
+    static final String JSON_BORDER_COLOR = "bordercolor";
+    static final String JSON_SCALE = "paneScale";
+    static final String JSON_THICKNESS = "thickness";
+    static final String JSON_DIMENSION_W = "dimensionW";
+    static final String JSON_DIMENSION_H= "dimensionH";
+    static final String JSON_REGION = "name";
+     static final String JSON_CAPITAL = "capital";
+      static final String JSON_LEADER = "leader";
+      static final String JSON_COLOR_RED = "red";
+      static final String JSON_COLOR_GREEN = "green";
+      static final String JSON_COLOR_BLUE = "blue";
+      static final String JSON_SUBREGIONS = "Subregion";
+      static final String JSON_IMAGE_LOCATE = "image location";
+      static final String JSON_IMAAGE_X = "x";
+      static final String JSON_IMAAGE_Y = "y";
+       static final String JSON_IMAGE_URL = "image url";
+      static final String JSON_IMAAGE = "image";
    public static DataManager data ;
  
       
@@ -66,12 +87,9 @@ public class TestSave {
              filePath = "./HW5SampleData/work/Slovakia.json";
         }
          
-         FileManager file = new FileManager();
-         file.saveData(data, filePath);
          
-         
-         
-         
+         save(data, filePath);
+    
     }
     public  static void createAndorra(){
         data = new DataManager();
@@ -175,4 +193,83 @@ public class TestSave {
         data.setDimensionW(802);
         data.setDimensionH(536);
       }
+     public static void save(AppDataComponent datas, String filePath) throws FileNotFoundException{
+      DataManager data = (DataManager)datas;
+       JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+	ObservableList<Subregion> items = data.getRegion();
+        for (int i=0;i<items.size();i++) {
+            String cap = items.get(i).getCapital();
+            String led = items.get(i).getLeader();
+            
+	        JsonObject itemJson = Json.createObjectBuilder()
+                   .add(JSON_REGION , items.get(i).getName())       
+                   .add(JSON_CAPITAL , cap)
+                   .add(JSON_LEADER , led)
+           
+                  
+		    .add(JSON_COLOR_RED , items.get(i).getR())
+		    .add(JSON_COLOR_GREEN , items.get(i).getG())
+                    .add(JSON_COLOR_BLUE , items.get(i).getB()).build();
+                    
+	    arrayBuilder.add(itemJson);
+	}
+         JsonArrayBuilder arrayBuilder1 = Json.createArrayBuilder();
+        if(data.getLocation().size()!=0){
+              
+             ArrayList<Point2D> locate = data.getLocation();
+             for(int i =0;i<locate.size();i++){
+                 JsonObject itemJson = Json.createObjectBuilder()
+                         .add(JSON_IMAAGE_X, locate.get(i).getX())
+                         .add(JSON_IMAAGE_Y, locate.get(i).getY()).build();
+                 arrayBuilder1.add(itemJson);
+             }
+        }
+         JsonArrayBuilder arrayBuilder2 = Json.createArrayBuilder();
+        if(data.getImages().size()!=0){
+             ArrayList<String> image = data.getImages();
+             for(int i =0;i<image.size();i++){
+                 JsonObject itemJson = Json.createObjectBuilder()
+                         .add(JSON_IMAAGE, image.get(i)).build();
+                         
+                 arrayBuilder2.add(itemJson);
+             }
+        }
+        
+        JsonArray itemsArray = arrayBuilder.build();
+        JsonArray locateArray = arrayBuilder1.build();
+        JsonArray imageArray = arrayBuilder2.build();
+       
+        JsonObject dataManagerJSO = Json.createObjectBuilder()
+                 .add(JSON_COUNTRY_NAME, data.getName())
+		.add(JSON_FILEPATH, data.getfilePath())
+                .add(JSON_BACKGROUND_COLOR, data.getBackgroundColor().toString())
+		.add(JSON_BORDER_COLOR, data.getBorderColor().toString())
+                .add(JSON_SCALE, data.getScale())
+		.add(JSON_THICKNESS, data.getThickness())
+                .add(JSON_DIMENSION_W, data.getDimensionW())
+		.add(JSON_DIMENSION_H, data.getDimensionH())
+                .add(JSON_SUBREGIONS,itemsArray)
+                .add(JSON_IMAGE_LOCATE,locateArray)
+                .add(JSON_IMAGE_URL,imageArray)
+		.build();
+       
+        
+        Map<String, Object> properties = new HashMap<>(1);
+	properties.put(JsonGenerator.PRETTY_PRINTING, true);
+	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+	StringWriter sw = new StringWriter();
+	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(dataManagerJSO);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	OutputStream os = new FileOutputStream(filePath);
+	JsonWriter jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(dataManagerJSO);
+	String prettyPrinted = sw.toString();
+	PrintWriter pw = new PrintWriter(filePath);
+	pw.write(prettyPrinted);
+	pw.close();
+    }
 }
+

@@ -143,6 +143,7 @@ import saf.components.AppDataComponent;
 
     @Override
     public void reset() {
+        Workspace.done = false;
          images = new ArrayList<String>();
         imageLocation = new ArrayList<Point2D>();
         polygonXY =  new ArrayList<ArrayList<Point2D>>();

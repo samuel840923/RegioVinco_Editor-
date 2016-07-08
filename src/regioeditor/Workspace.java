@@ -9,6 +9,8 @@ package regioeditor;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
@@ -152,8 +154,8 @@ public class Workspace extends AppWorkspaceComponent{
       backgroundColor = new Label(props.getProperty(PropertyType.BACKGROUND_COLOR));
       borderColor = new Label(props.getProperty(PropertyType.BORDER_COLOR));
       borderThick = new Label(props.getProperty(PropertyType.BORDER_THICKNESS));
-      zooming = new Slider(1,6,1);
-      thickness = new Slider(1,10,1);
+      zooming = new Slider(1,1000,600);
+      thickness = new Slider(0.001,1,0.01);
       colorBackground = new ColorPicker();
       colorBorder = new ColorPicker();
       zoom.setMinWidth(100);
@@ -218,9 +220,9 @@ public class Workspace extends AppWorkspaceComponent{
        workspace.getItems().addAll(mapPane,TablePane);
        app.getGUI().getAppPane().setCenter(workspace);
        done = true;
-       System.out.println(data.isFlagExist(data.getName()));
-       
-    }
+      
+    
+               }
 
     @Override
     public void initStyle() {
