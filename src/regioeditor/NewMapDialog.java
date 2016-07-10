@@ -107,10 +107,8 @@ public class NewMapDialog extends Stage{
 	
 		fc.setTitle(props.getProperty(SAVE_WORK_TITLE));
 		
-		
-
 		File selectedFile = fc.showSaveDialog(singleton);
-                System.out.println(selectedFile.getPath());
+               
                 
     }
      

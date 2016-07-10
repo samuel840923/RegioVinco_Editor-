@@ -183,7 +183,7 @@ import saf.components.AppDataComponent;
             if(region.get(i).getLeader().equals("null"))
                 return false;
             String lead = region.get(i).getLeader()+".png";
-            System.out.println(dir+lead);
+           
             File file = new File(dir+lead);
             if(!(file.exists()))
                 return false;

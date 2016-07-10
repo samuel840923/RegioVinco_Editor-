@@ -67,6 +67,12 @@ public class RunningTest {
         
       String[] countryList = {"Ordino","Canillo","Encamp","Escaldes-Engordany","La Massana",
           "Andorra la Vella","Sant Julia de Loria"};
+      String[] cap = {"Ordino (town)","Canillo (town)","Encamp (town)","Escaldes-Engordany (town)",
+          "La Massana (town)","Andorra la Vella (city)","Sant Julia de Loria (town)",
+      "Josep Areny", "Maria Rosa Ferrer Obiols",  };
+      String[] lead = {"Ventura Espot","Enric Casadevall Medrano","Miquel Alís Font","Montserrat Capdevila Pallarés",
+        "Josep Areny", "Maria Rosa Ferrer Obiols", "Josep Pintat Forné",
+      };
       assertEquals("Andorra",load.getName());
       assertEquals("./HW5SampleData/raw_map_data/Andorra.json", load.getfilePath());
       System.out.println("The path are equal");
@@ -88,6 +94,8 @@ public class RunningTest {
        System.out.println("The dimension y  are the same");
       for(int i=0;i<countryList.length;i++){
            assertEquals(countryList[i], load.getRegion().get(i).getName());
+            assertEquals(cap[i], load.getRegion().get(i).getCapital());
+             assertEquals(lead[i], load.getRegion().get(i).getLeader());
       }
         
    
@@ -104,7 +112,8 @@ public class RunningTest {
         load = TestLoad.data;
         String[] countryList = {"Acquaviva","Borgo Maggiore","Chiesanuova","Domagnano","Faetano"
                 ,"Fiorentino","Montegiardino","City of San Marino","Serravalle"};
-        
+        String[] lead = {"Lucia Tamagnini","Sergio Nanni","Franco Santi","Gabriel Guidi","Pier Mario Bedetti",
+        "Gerri Fabbri","Marta Fabbri","Maria Teresa Beccari","Leandro Maiani"};
       assertEquals("San Marino",load.getName());
       assertEquals("./HW5SampleData/raw_map_data/San Marino.json", load.getfilePath());
       System.out.println("The path are equal");
@@ -123,6 +132,7 @@ public class RunningTest {
        System.out.println("The dimension y  are the same");
       for(int i=0;i<countryList.length;i++){
            assertEquals(countryList[i], load.getRegion().get(i).getName());
+              assertEquals(lead[i], load.getRegion().get(i).getLeader());
       }
    }
    @Test
@@ -160,6 +170,7 @@ public void testSlovakia() throws IOException{
           
        for(int i=0;i<countryList.length;i++){
            assertEquals(countryList[i], load.getRegion().get(i).getName());
+         
       }
     
 }

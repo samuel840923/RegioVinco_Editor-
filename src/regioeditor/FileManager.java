@@ -162,7 +162,7 @@ public class FileManager implements AppFileComponent{
         done = false;
          DataManager data = (DataManager)datas;
         data.reset();
-        Progress p = new Progress();
+        
         JsonObject json = loadJSONFile(filePath);
     String countryName = json.getString(JSON_COUNTRY_NAME);
     String geoFile = json.getString(JSON_FILEPATH);
@@ -215,7 +215,7 @@ done = true;
     @Override
     public void exportData(AppDataComponent datas, String filePath) throws IOException {
         DataManager data = (DataManager)datas;
-        String path = filePath+data.getName()+".rvm";
+        String path = filePath;
         
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 	ObservableList<Subregion> items = data.getRegion();
