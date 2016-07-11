@@ -6,11 +6,14 @@
 package regioeditor;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import properties_manager.PropertiesManager;
 import saf.AppTemplate;
+import saf.components.AppDataComponent;
+import saf.components.AppFileComponent;
 import static saf.settings.AppPropertyType.SAVE_WORK_TITLE;
 import static saf.settings.AppPropertyType.WORK_FILE_EXT;
 import static saf.settings.AppPropertyType.WORK_FILE_EXT_DESC;
@@ -57,5 +60,26 @@ public class Controller {
     dialog.setContentText(props.getProperty(PropertyType.RENAME_CONTENT));
     Optional<String> result = dialog.showAndWait();
     
+    }
+
+  public  void processExport() {
+      try{
+        FileChooser fc = new FileChooser();
+         PropertiesManager props = PropertiesManager.getPropertiesManager();
+                DataManager dataManager = (DataManager)app.getDataComponent();
+		AppFileComponent fileManager = app.getFileComponent();
+		fc.setInitialDirectory(new File("./HW5SampleData/work/"));
+                fc.setInitialFileName(dataManager.getName());
+		fc.getExtensionFilters().add( new FileChooser.ExtensionFilter(props.getProperty(WORK_FILE_EXT_DESC),  props.getProperty(WORK_FILE_EXT)));
+                File selectedFile = fc.showSaveDialog(app.getGUI().getWindow());
+                
+                if(selectedFile!=null){
+                fileManager.exportData(dataManager, selectedFile.getAbsolutePath());
+                }
+                
+                }catch(IOException e){
+            System.out.println("Error occur");
+        }
+               
     }
 }

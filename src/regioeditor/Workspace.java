@@ -44,6 +44,8 @@ import saf.ui.AppMessageDialogSingleton;
 import saf.ui.AppYesNoCancelDialogSingleton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import static saf.settings.AppPropertyType.EXPORT_ICON;
+import static saf.settings.AppPropertyType.EXPORT_TOOLTIP;
 import static saf.settings.AppStartupConstants.FILE_PROTOCOL;
 import static saf.settings.AppStartupConstants.PATH_IMAGES;
 /**
@@ -90,6 +92,7 @@ public class Workspace extends AppWorkspaceComponent{
     Button rename;
     Button dimension;
     Button removeImage;
+    Button export;
     Button reassign;
    
     Button play;
@@ -145,7 +148,7 @@ public class Workspace extends AppWorkspaceComponent{
       editToolBar1 = new HBox();
       editToolBar2 = new HBox();
       mapPane = new Pane();
-       
+      export = gui.initChildButton(app.getGUI().getToolBar(),EXPORT_ICON.toString(), EXPORT_TOOLTIP.toString(),	false);
       addImage = gui.initChildButton(editToolBar1, PropertyType.ADD_ICON.toString(), PropertyType.ADD_ITEM_TOOLTIP.toString(), false);
       removeImage = gui.initChildButton(editToolBar1, PropertyType.REMOVE_ICON.toString(), PropertyType.REMOVE_ITEM_TOOLTIP.toString(), true);
       play = gui.initChildButton(editToolBar1, PropertyType.PLAY_ICON.toString(), PropertyType.PLAY_TOOLTIP.toString(), false);
@@ -281,6 +284,9 @@ public class Workspace extends AppWorkspaceComponent{
       });
       mapPane.setOnMouseClicked(e-> {
         
+      });
+      export.setOnAction(e -> {
+          control.processExport();
       });
         
     }
