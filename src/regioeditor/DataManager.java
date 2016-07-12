@@ -25,7 +25,7 @@ import saf.components.AppDataComponent;
 
     public class DataManager implements AppDataComponent {
     // FIRST THE THINGS THAT HAVE TO BE SAVED TO FILES
-         Color backgroundColor;
+    Color backgroundColor;
     Color borderColor;
     Double borderThickness;
     Double paneScale;
@@ -190,6 +190,18 @@ import saf.components.AppDataComponent;
                
         }
        return true;
+    }
+
+    @Override
+    public void setStart(String file,String name) {
+      backgroundColor = Color.ORANGE;
+      borderColor = Color.BLACK;
+      borderThickness = 0.1;
+      paneScale = 1.0;
+      geometricFile = file;
+      regionName = name;
+      dimensionW = 803;
+      dimensionH = 536;
     }
     }
     

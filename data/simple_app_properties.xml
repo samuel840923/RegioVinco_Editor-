@@ -49,6 +49,12 @@
         <property name="SAVE_UNSAVED_WORK_MESSAGE"	value="Would you like to save your unsaved work first?"></property>
         <property name="SAVE_UNSAVED_WORK_TITLE"	value="Save unsaved work?"></property>
 	
+        <property name = "FILE_NAME"                value = "File name"></property>
+        <property name = "PARENT"                  value = "Parent Directory"></property>
+        <property name = "LOAD"                    value = "Load file"></property>
+        <property name = "BROWSE"                value = "Browse"></property>
+        <property name = "LOADED"                value = "load!"></property>
+        
         <property name="NEW_CREATED_MESSAGE"		value="New Work Created but not yet Saved"></property>
         <property name="WORK_LOADED_MESSAGE"		value="The Work has been Loaded"></property>
         <property name="WORK_SAVED_MESSAGE"		value="The Work has been Saved"></property>
