@@ -9,6 +9,9 @@ package regioeditor;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
@@ -121,6 +124,10 @@ public class Workspace extends AppWorkspaceComponent{
     Text debugText;
     
     Rectangle clip;
+    double xAvg;
+    double yAvg;
+    
+    ArrayList<Polygon> polygon;
     
  public Workspace(AppTemplate initApp) throws IOException {
 	// KEEP THIS FOR LATER
@@ -206,8 +213,11 @@ public class Workspace extends AppWorkspaceComponent{
        workspace.getItems().clear();
        clipPane.getChildren().clear();
        mapPane.getChildren().clear();
-       
+       polygon = new ArrayList<Polygon>();
        DataManager data = (DataManager)app.getDataComponent();
+       if(data.getRegion().size()==0){
+           startNew();
+       }
        double x = data.getDimensionW();
        double y = data.getDimensionH();
        Rectangle clip = new Rectangle(0,0,x,y);
@@ -219,6 +229,8 @@ public class Workspace extends AppWorkspaceComponent{
        back.setFill(background);
        polygonPane = drawPolygon();
        imagePane = redrawImage();
+        zooming.setValue(data.getScale());
+       setScale();
        clipPane.getChildren().addAll(polygonPane,imagePane);
        workspace.getItems().addAll(mapPane,TablePane);
        app.getGUI().getAppPane().setCenter(workspace);
@@ -339,18 +351,40 @@ public class Workspace extends AppWorkspaceComponent{
              
               
       } 
-           double X = avgX/m;
-           double Y = avgY/m;
+           xAvg = avgX/m;
+           yAvg = avgY/m;
            double scale = data.getScale();
-               polygonPane.setLayoutX((polygonPane.getLayoutX()+(802/2-X))*scale);
-               polygonPane.setLayoutY((polygonPane.getLayoutY()+(536/2-Y))*scale);
+               polygonPane.setLayoutX((polygonPane.getLayoutX()+(802/2-xAvg))*scale);
+               polygonPane.setLayoutY((polygonPane.getLayoutY()+(536/2-yAvg))*scale);
                polygonPane.setScaleX(polygonPane.getScaleX()*scale);
                polygonPane.setScaleY(polygonPane.getScaleY()*scale);
+                
            
            polygonPane.setPrefSize(802, 536); 
            polygonPane.requestLayout();
            return polygonPane;   
           
     }
-    
+
+    public void startNew() {
+        DataManager data = (DataManager)app.getDataComponent();
+       for(int i=0;i<data.getPoly().size();i++){
+           Subregion s = new Subregion("To be fill","null","null");
+           s.setR(i+1);
+           s.setG(i+1);
+           s.setB(i+1);
+           data.addRegion(s);
+       }
+    }
+
+    public void setScale() {
+        DataManager data = (DataManager)app.getDataComponent();
+        zooming.valueProperty().addListener(e->{
+          polygonPane.setScaleX(zooming.getValue());
+           polygonPane.setScaleY(zooming.getValue());
+           polygonPane.setLayoutX(((802/2-xAvg))*zooming.getValue());
+           polygonPane.setLayoutY(((536/2-yAvg))*zooming.getValue());
+        });
+
+    }
 }

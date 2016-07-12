@@ -302,7 +302,6 @@ done = true;
         // num of region
         JsonArray SubRegion = json.getJsonArray(JSON_SUBREGION);
         // get the size of the screen
-     
              //
         for(int i =0; i<SubRegion.size();i++){
            JsonObject Sub_Region_Poly = SubRegion.getJsonObject(i);
@@ -314,7 +313,7 @@ done = true;
             points = new ArrayList<Point2D>();
            for (int j =0;j<SubPolyRegion.size();j++){
            JsonArray  coordinate = SubPolyRegion.getJsonArray(j); 
-          
+
            //XY
            for (int k = 0;k<coordinate.size() ;k++){
                JsonObject coor = coordinate.getJsonObject(k);
@@ -367,6 +366,8 @@ public  double getDataAsDouble(JsonObject json, String dataName) {
         JsonNumber number = (JsonNumber)value;
         return number.bigIntegerValue().intValue();
     }
+
+
 }
     
 

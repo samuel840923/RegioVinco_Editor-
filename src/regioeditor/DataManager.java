@@ -200,7 +200,7 @@ import saf.components.AppDataComponent;
       paneScale = 1.0;
       geometricFile = file;
       regionName = name;
-      dimensionW = 803;
+      dimensionW = 802;
       dimensionH = 536;
     }
     }
