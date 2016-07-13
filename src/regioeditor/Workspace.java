@@ -124,10 +124,15 @@ public class Workspace extends AppWorkspaceComponent{
     Text debugText;
     
     Rectangle clip;
+     Rectangle back;
     double xAvg;
     double yAvg;
     
     ArrayList<Polygon> polygon;
+    ArrayList<Integer> randomC;
+    
+    double dimX;
+    double dimY;
     
  public Workspace(AppTemplate initApp) throws IOException {
 	// KEEP THIS FOR LATER
@@ -174,8 +179,6 @@ public class Workspace extends AppWorkspaceComponent{
       editToolBar1.getChildren().addAll(borderThick,thickness,zoom,zooming);
       
       
-      editToolBar2.getChildren().addAll(backgroundColor,colorBackground,
-              borderColor,colorBorder,rename);
       dimension = gui.initChildButton(editToolBar2, PropertyType.DIMENSION_ICON.toString(), PropertyType.DIMENSION_TOOLTIP.toString(), false);
       reassign = gui.initChildButton(editToolBar2, PropertyType.REDO_ICON.toString(), PropertyType.REDO_TOOLTIP.toString(), false);
 
@@ -218,18 +221,17 @@ public class Workspace extends AppWorkspaceComponent{
        if(data.getRegion().size()==0){
            startNew();
        }
-       double x = data.getDimensionW();
-       double y = data.getDimensionH();
-       Rectangle clip = new Rectangle(0,0,x,y);
+       dimX = data.getDimensionW();
+       dimY  = data.getDimensionH();
+       clip = new Rectangle(0,0,dimX,dimY);
        clipPane.setClip(clip);
-       Rectangle back = new Rectangle(0,0,x,y);
+       back = new Rectangle(0,0,dimX,dimY);
        clipPane.getChildren().add(back);
        Color background = data.getBackgroundColor();
        mapPane.getChildren().add(clipPane);
        back.setFill(background);
        polygonPane = drawPolygon();
        imagePane = redrawImage();
-        zooming.setValue(data.getScale());
        setScale();
        clipPane.getChildren().addAll(polygonPane,imagePane);
        workspace.getItems().addAll(mapPane,TablePane);
@@ -259,8 +261,6 @@ public class Workspace extends AppWorkspaceComponent{
         borderColor.getStyleClass().add(CLASS_BORDER_COLOR_LABEL);
         borderThick.getStyleClass().add(CLASS_PROMPT_LABEL);
         mapLabel.getStyleClass().add(CLASS_HEADING_LABEL);
-        colorBorder.getStyleClass().add(CLASS_BUTTON);
-        colorBackground.getStyleClass().add(CLASS_BUTTON);
         dimension.getStyleClass().add(CLASS_DIMENSION);
         rename.getStyleClass().add(CLASS_DIMENSION);
         reassign.getStyleClass().add(CLASS_BUTTON);
@@ -294,11 +294,13 @@ public class Workspace extends AppWorkspaceComponent{
       rename.setOnAction(e -> {
           control.processRename();
       });
-      mapPane.setOnMouseClicked(e-> {
-        
-      });
+      
       export.setOnAction(e -> {
           control.processExport();
+      });
+      
+      reassign.setOnAction(e->{
+          randomColor();
       });
         
     }
@@ -344,12 +346,11 @@ public class Workspace extends AppWorkspaceComponent{
               Color c =  Color.rgb(red,green,blue);
               double thick = data.getThickness();
               poly.setStroke(Paint.valueOf("Black"));
-              poly.setFill(c);
-              
+              poly.setFill(c);    
               poly.setStrokeWidth(thick);
-              polygonPane.getChildren().add(poly);
-             
-              
+              poly.setId(j+"");
+              this.polygon.add(poly);
+              polygonPane.getChildren().add(poly);            
       } 
            xAvg = avgX/m;
            yAvg = avgY/m;
@@ -379,12 +380,75 @@ public class Workspace extends AppWorkspaceComponent{
 
     public void setScale() {
         DataManager data = (DataManager)app.getDataComponent();
+        colorBorder = new ColorPicker(data.getBorderColor());
+        colorBackground = new ColorPicker(data.getBackgroundColor());
+        editToolBar2.getChildren().addAll(backgroundColor,colorBackground,
+        borderColor,colorBorder,rename);
+        colorBorder.getStyleClass().add(CLASS_BUTTON);
+        colorBackground.getStyleClass().add(CLASS_BUTTON);
+        
+        zooming.setValue(data.getScale());
+        thickness.setValue(data.getThickness());
+        
+        
         zooming.valueProperty().addListener(e->{
           polygonPane.setScaleX(zooming.getValue());
            polygonPane.setScaleY(zooming.getValue());
            polygonPane.setLayoutX(((802/2-xAvg))*zooming.getValue());
            polygonPane.setLayoutY(((536/2-yAvg))*zooming.getValue());
+           data.setScale(zooming.getValue());
+        });
+        
+       thickness.valueProperty().addListener(e->{
+        for(int i=0;i<polygon.size();i++){
+            polygon.get(i).setStrokeWidth(thickness.getValue());
+            data.setThickness(thickness.getValue());
+        }
+        });
+       
+       
+        colorBorder.setOnAction(e->{
+            Color c = colorBorder.getValue();
+            for(int i=0;i<polygon.size();i++){
+            polygon.get(i).setStroke(c);
+          }
+            data.setBorderColor(c);
+        });
+        
+        
+        colorBackground.setOnAction(e->{
+             Color c = colorBackground.getValue();
+             back.setFill(c);
+             data.setBackgroundColor(c);
         });
 
+    }
+
+    private void randomColor() {
+         DataManager data = (DataManager)app.getDataComponent();
+         randomC = new ArrayList<Integer>();
+         int d = 1;
+         for(int i=0;i<polygon.size();i++){
+              int random =(int) (254* Math.random())+1;
+             for(int j =0;j<randomC.size();j++){
+                 if(random==randomC.get(j)){
+                     while( random==randomC.get(j))
+                           random =(int) (254* Math.random())+1;
+                 }
+                 randomC.add(random);
+             }
+             
+             
+         }
+      
+       for(int i=0;i<polygon.size();i++){
+           int color = randomC.get(i);
+           Color c = Color.rgb(color, color, color);
+           polygon.get(i).setFill(c);
+           data.getRegion().get(i).setG(color);
+           data.getRegion().get(i).setG(color);
+           data.getRegion().get(i).setG(color);
+       }
+       
     }
 }

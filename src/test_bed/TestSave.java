@@ -49,8 +49,7 @@ public class TestSave {
       
     
     public static void main(String[] args) throws IOException{
-        save("SM");
-        save("A");
+        
         save("S");
     }
     public static void save(String s) throws FileNotFoundException, IOException{
@@ -138,9 +137,12 @@ public class TestSave {
         data.setDimensionH(536);
       }
      public  static void createSlovakia(){
+         
         data = new DataManager();
         data.setName("Slovakia");
       data.setfilePath("./HW5SampleData/raw_map_data/Slovakia.json");
+       data.setParentDir("To be edit");
+       System.out.println(data.getParentDir());
         Subregion a = new Subregion("Bratislava","null","null");
         Subregion b = new Subregion("Trnava","null","null");
         Subregion c = new Subregion("Trencin","null","null");

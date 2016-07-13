@@ -7,6 +7,7 @@ package regioeditor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
@@ -25,6 +26,7 @@ import static saf.settings.AppStartupConstants.PATH_WORK;
  */
 public class Controller {
     AppTemplate app;
+  
       public Controller(AppTemplate initApp) {
 	app = initApp;
     }

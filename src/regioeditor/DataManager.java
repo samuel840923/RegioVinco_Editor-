@@ -32,6 +32,7 @@ import saf.components.AppDataComponent;
     String geometricFile;
     String regionName;
     // NAME OF THE TODO LIST
+    String filename;
     StringProperty name;
     
     // LIST OWNER
@@ -193,7 +194,7 @@ import saf.components.AppDataComponent;
     }
 
     @Override
-    public void setStart(String file,String name) {
+    public void setStart(String file,String name, String parent) {
       backgroundColor = Color.ORANGE;
       borderColor = Color.BLACK;
       borderThickness = 0.1;
@@ -202,6 +203,13 @@ import saf.components.AppDataComponent;
       regionName = name;
       dimensionW = 802;
       dimensionH = 536;
+      filename = parent;
+    }
+    public String getParentDir(){
+        return filename;
+    }
+    public void setParentDir(String p){
+        filename = p;
     }
     }
     

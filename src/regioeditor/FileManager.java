@@ -61,6 +61,8 @@ public class FileManager implements AppFileComponent{
       static final String JSON_IMAAGE_Y = "y";
        static final String JSON_IMAGE_URL = "image url";
       static final String JSON_IMAAGE = "image";
+       static final String JSON_PARENT = "file parent";
+      
      //GEOMETRIC X Y    
     static final String JSON_SUBREGION = "SUBREGIONS";
     static final String JSON_NUMBER_OF_REGION = "NUMBER_OF_SUBREGIONS";
@@ -123,8 +125,9 @@ public class FileManager implements AppFileComponent{
         JsonArray itemsArray = arrayBuilder.build();
         JsonArray locateArray = arrayBuilder1.build();
         JsonArray imageArray = arrayBuilder2.build();
-       
         JsonObject dataManagerJSO = Json.createObjectBuilder()
+                
+                 .add(JSON_PARENT,data.getParentDir())
                  .add(JSON_COUNTRY_NAME, data.getName())
 		.add(JSON_FILEPATH, data.getfilePath())
                 .add(JSON_BACKGROUND_COLOR, data.getBackgroundColor().toString())
@@ -173,6 +176,7 @@ public class FileManager implements AppFileComponent{
     double thick = getDataAsDouble(json,JSON_THICKNESS);
     double dW = getDataAsDouble(json,JSON_DIMENSION_W);
     double dH = getDataAsDouble(json,JSON_DIMENSION_H);
+    data.setParentDir(json.getString(JSON_PARENT));
     data.setfilePath(geoFile);
     data.setName(countryName);
     Color background = Color.valueOf(backgroundcolor);
