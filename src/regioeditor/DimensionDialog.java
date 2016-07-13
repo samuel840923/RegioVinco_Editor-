@@ -58,9 +58,10 @@ public class DimensionDialog extends Stage{
           cancel = new Button (CANCEL);
           ok.setOnAction(e->{
               getinfo();
+              close();
           });
           cancel.setOnAction(e->{
-              
+              close();
           });
           dialog.add(X, 0, 0);
           dialog.add(forX, 1, 0);

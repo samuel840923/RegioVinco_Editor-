@@ -186,17 +186,14 @@ public class Workspace extends AppWorkspaceComponent{
       rename = new Button(props.getProperty(PropertyType.RENAME));
       editToolBar1.getChildren().addAll(borderThick,thickness,zoom,zooming);
       
-      
-      dimension = gui.initChildButton(editToolBar2, PropertyType.DIMENSION_ICON.toString(), PropertyType.DIMENSION_TOOLTIP.toString(), false);
-      reassign = gui.initChildButton(editToolBar2, PropertyType.REDO_ICON.toString(), PropertyType.REDO_TOOLTIP.toString(), false);
-
-      
       TablePane.getChildren().add(editToolBar1);
       TablePane.getChildren().add(editToolBar2);
       regionTable = new TableView();   
       mapLabel = new Label(DEFAULT_STRING);
      
-        
+      dimension = gui.initChildButton(editToolBar2, PropertyType.DIMENSION_ICON.toString(), PropertyType.DIMENSION_TOOLTIP.toString(), false);
+      reassign = gui.initChildButton(editToolBar2, PropertyType.REDO_ICON.toString(), PropertyType.REDO_TOOLTIP.toString(), false);
+
        // NOW SETUP THE TABLE COLUMN
         
         regionColumn = new TableColumn(props.getProperty(PropertyType.SUBREGION_NAME));
@@ -301,7 +298,13 @@ public class Workspace extends AppWorkspaceComponent{
           
       });
       dimension.setOnAction(e ->{
+           DataManager data = (DataManager)app.getDataComponent();
           control.processDimension();
+          clip.setWidth(data.getDimensionW());
+          clip.setHeight(data.getDimensionH());
+           back.setWidth(data.getDimensionW());
+          back.setHeight(data.getDimensionH());
+          clipPane.setPrefSize(data.getDimensionW(), data.getDimensionH());
       });
       rename.setOnAction(e -> {
           control.processRename();
@@ -309,6 +312,7 @@ public class Workspace extends AppWorkspaceComponent{
       
       export.setOnAction(e -> {
           control.processExport();
+         
       });
       
       reassign.setOnAction(e->{
@@ -398,7 +402,9 @@ public class Workspace extends AppWorkspaceComponent{
         colorBorder = new ColorPicker(data.getBorderColor());
         colorBackground = new ColorPicker(data.getBackgroundColor());
         editToolBar2.getChildren().clear();
-        editToolBar2.getChildren().addAll(backgroundColor,colorBackground,
+         
+
+        editToolBar2.getChildren().addAll(dimension,reassign,backgroundColor,colorBackground,
         borderColor,colorBorder,rename);
         colorBorder.getStyleClass().add(CLASS_BUTTON);
         colorBackground.getStyleClass().add(CLASS_BUTTON);
@@ -529,5 +535,8 @@ public class Workspace extends AppWorkspaceComponent{
           }
           data.removeImage(in);
           
+    }
+    public Pane getSnapPane(){
+        return clipPane;
     }
 }

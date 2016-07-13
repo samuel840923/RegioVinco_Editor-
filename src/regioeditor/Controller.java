@@ -11,8 +11,12 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.sampled.LineUnavailableException;
@@ -72,7 +76,12 @@ public class Controller {
     }
 
     public void processDimension() {
+         DataManager data = (DataManager)app.getDataComponent();
       DimensionDialog di = DimensionDialog.getSingleton();
+      di.init(di);
+      data.setDimensionW(di.getNewX());
+       data.setDimensionH(di.getNewY());
+      
     }
 
     void processRename() {
@@ -87,6 +96,7 @@ public class Controller {
     
  String newParent =    AppFileController.changeName(result.get());
  data.setParentDir(newParent);
+ data.setName(result.get());
     
     }
 
@@ -102,6 +112,14 @@ public class Controller {
                 File selectedFile = fc.showSaveDialog(app.getGUI().getWindow());
                 
                 if(selectedFile!=null){
+                    String fileString = selectedFile.getAbsolutePath();
+                    String png = fileString.replace("rvm", "png");
+                     Workspace workspace = (Workspace)app.getWorkspaceComponent();
+                     File export = new File(png);
+                     System.out.println(png);
+                    WritableImage image = workspace.clipPane.snapshot(new SnapshotParameters(), null);
+                   ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", export);
+
                 fileManager.exportData(dataManager, selectedFile.getAbsolutePath());
                 }
                 
