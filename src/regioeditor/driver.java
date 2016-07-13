@@ -113,15 +113,9 @@ public class driver{
         }
     }
     public static void main(String[] args){
-           driver audio = new driver();
-        try
-        {
-            audio.loadAudio("NA", "/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Andorra/Andorra National Anthem.mid");
-            audio.play("NA", true);
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
-        }        
+      String parent = "anc/abc/";
+       
+        String newfile = parent.replace("abc","hi");
+        System.out.println(newfile);
     }
 }

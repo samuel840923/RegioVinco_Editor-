@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -130,9 +131,16 @@ public class Workspace extends AppWorkspaceComponent{
     
     ArrayList<Polygon> polygon;
     ArrayList<Integer> randomC;
+    ArrayList<ImageView> imageview;
     
     double dimX;
     double dimY;
+    double orginX;
+    double orginY;
+    
+    int now;
+    int prev=0;
+    Image nowImage;
     
  public Workspace(AppTemplate initApp) throws IOException {
 	// KEEP THIS FOR LATER
@@ -217,6 +225,7 @@ public class Workspace extends AppWorkspaceComponent{
        clipPane.getChildren().clear();
        mapPane.getChildren().clear();
        polygon = new ArrayList<Polygon>();
+       imageview = new ArrayList<ImageView>();
        DataManager data = (DataManager)app.getDataComponent();
        if(data.getRegion().size()==0){
            startNew();
@@ -274,10 +283,13 @@ public class Workspace extends AppWorkspaceComponent{
     private void setUpHandler() {
       Controller control = new Controller(app);
       addImage.setOnAction(e-> {
-          control.processAddImage();
+          String url = control.processAddImage();
+          addimage(url);
       }); 
       removeImage.setOnAction(e-> {
           control.processRemoveImage();
+         deletImage();
+          
       });
       play.setOnAction(e-> {
           control.playMusic();
@@ -319,7 +331,10 @@ public class Workspace extends AppWorkspaceComponent{
                ImageView imageV = new ImageView(image);
                imageV.setLayoutX(locX);
                imageV.setLayoutY(locY);
+               imageview.add(imageV);
           imagePane.getChildren().add(imageV);
+          setImageControll(imageV);
+          
         }
         return imagePane;
            
@@ -382,6 +397,7 @@ public class Workspace extends AppWorkspaceComponent{
         DataManager data = (DataManager)app.getDataComponent();
         colorBorder = new ColorPicker(data.getBorderColor());
         colorBackground = new ColorPicker(data.getBackgroundColor());
+        editToolBar2.getChildren().clear();
         editToolBar2.getChildren().addAll(backgroundColor,colorBackground,
         borderColor,colorBorder,rename);
         colorBorder.getStyleClass().add(CLASS_BUTTON);
@@ -421,6 +437,7 @@ public class Workspace extends AppWorkspaceComponent{
              back.setFill(c);
              data.setBackgroundColor(c);
         });
+        
 
     }
 
@@ -435,10 +452,10 @@ public class Workspace extends AppWorkspaceComponent{
                      while( random==randomC.get(j))
                            random =(int) (254* Math.random())+1;
                  }
-                 randomC.add(random);
+                 
              }
              
-             
+             randomC.add(random);
          }
       
        for(int i=0;i<polygon.size();i++){
@@ -450,5 +467,67 @@ public class Workspace extends AppWorkspaceComponent{
            data.getRegion().get(i).setG(color);
        }
        
+    }
+
+    public void addimage(String url) {
+         DataManager data = (DataManager)app.getDataComponent();
+        Image image= new Image(url);
+        ImageView view = new ImageView(image);
+        view.setX(802/2);
+        view.setY(536/2);
+        imageview.add(view);
+        imagePane.getChildren().add(view);
+        setImageControll(view);
+        
+    }
+
+    public void setImageControll(ImageView view) {
+       DataManager data = (DataManager)app.getDataComponent();
+       view.setOnMouseDragged(e->{
+//           double delX = e.getX()-orginX;
+//           double delY = e.getY()-orginY;
+//          double nowX = view.getX();
+//          double nowY = view.getY();
+           view.setX(e.getX());
+           view.setY(e.getY());
+           System.out.println(e.getX());
+       });
+      
+       view.setOnMouseClicked(e->{  
+          
+           for(int i=0;i<imageview.size();i++){
+               if(imageview.get(i)==view)
+                   now = i;
+           }
+           imageview.get( prev).setEffect(null);
+           
+            DropShadow borderGlow= new DropShadow();
+           borderGlow.setColor(Color.RED);
+          imageview.get(now).setEffect(borderGlow);
+          nowImage = imageview.get(now).getImage();
+          prev = now;
+          removeImage.setDisable(false);
+       });
+       view.setOnMousePressed(e->{
+           orginX = e.getX();
+           orginY = e.getY();
+       });
+       
+      
+    }
+
+    private void deletImage() {
+         DataManager data = (DataManager)app.getDataComponent();
+        int in=0;
+          for (int i =0;i<imageview.size();i++){
+              if(imageview.get(i).getImage()==nowImage){
+                  imageview.get(i).setImage(null);
+                  imageview.remove(i);
+                  in = i;
+                  break;
+              }
+          }
+          data.removeImage(in);
+          
     }
 }

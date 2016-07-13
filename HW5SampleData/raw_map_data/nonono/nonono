@@ -1,7 +1,7 @@
 
 {
-    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/work/America",
-    "country name":"America",
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/last one",
+    "country name":"last one",
     "geometricFilePath":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/Slovakia.json",
     "backgroundcolor":"0xffa500ff",
     "bordercolor":"0x000000ff",

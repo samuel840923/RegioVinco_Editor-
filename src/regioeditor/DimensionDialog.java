@@ -34,7 +34,8 @@ public class DimensionDialog extends Stage{
     static final String OK = "ok";
     static final String CANCEL  = "cancel";
     static final String CLASS_DIMENSION = "dimenstion_dialog";
-    
+    double newX = 803;
+    double newY = 536;
      public static DimensionDialog getSingleton() {
 	if (singleton == null)
 	    singleton = new DimensionDialog();
@@ -55,7 +56,12 @@ public class DimensionDialog extends Stage{
           
           ok = new Button(OK);
           cancel = new Button (CANCEL);
-          
+          ok.setOnAction(e->{
+              getinfo();
+          });
+          cancel.setOnAction(e->{
+              
+          });
           dialog.add(X, 0, 0);
           dialog.add(forX, 1, 0);
           dialog.add(Y, 0, 1);
@@ -65,8 +71,20 @@ public class DimensionDialog extends Stage{
           
           dialog.getStyleClass().add(CLASS_DIMENSION);
           this.setScene(scene);
-          show();
+          showAndWait();
           
       }
+
+    public void getinfo() {
+       newX = Double.parseDouble(forX.getText());
+       newY = Double.parseDouble(forY.getText());
+    }
+    
+   public double getNewX(){
+       return newX;
+   }
+   public double getNewY(){
+       return newY;
+   }
     
 }

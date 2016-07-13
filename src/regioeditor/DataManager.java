@@ -211,6 +211,20 @@ import saf.components.AppDataComponent;
     public void setParentDir(String p){
         filename = p;
     }
+
+    @Override
+    public String getdirc() {
+        return filename;
+    }
+
+    @Override
+    public String getN() {
+        return regionName;
+    }
+
+    void removeImage(int in) {
+        images.remove(in);
+    }
     }
     
   
