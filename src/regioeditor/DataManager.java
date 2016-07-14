@@ -225,6 +225,14 @@ import saf.components.AppDataComponent;
     void removeImage(int in) {
         images.remove(in);
     }
+
+    void editLocation(int i,double stopX, double stopY) {
+      imageLocation.remove(i);
+      imageLocation.add(i, new Point2D(stopX,stopY));
+    }
+    public void editRegion(int i,Subregion s){
+        region.set(i, s);
+    }
     }
     
   

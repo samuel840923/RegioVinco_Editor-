@@ -128,4 +128,12 @@ public class Controller {
         }
                
     }
+
+    void processSubregion(int i) {
+         DataManager data = (DataManager)app.getDataComponent();
+      SubregionDialog di = SubregionDialog.getSingleton(app);
+      di.init(di);
+      di.getInfo(i);
+      di.diplay();
+    }
 }

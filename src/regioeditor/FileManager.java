@@ -87,7 +87,7 @@ public class FileManager implements AppFileComponent{
         for (int i=0;i<items.size();i++) {
             String cap = items.get(i).getCapital();
             String led = items.get(i).getLeader();
-            
+            System.out.println(items.get(i).getR()+" "+items.get(i).getG()+" "+ items.get(i).getB());
 	        JsonObject itemJson = Json.createObjectBuilder()
                    .add(JSON_REGION , items.get(i).getName())       
                    .add(JSON_CAPITAL , cap)

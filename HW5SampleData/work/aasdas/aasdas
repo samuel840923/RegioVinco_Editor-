@@ -1,0 +1,74 @@
+
+{
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/work/aasdas",
+    "country name":"aasdas",
+    "geometricFilePath":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/Andorra.json",
+    "backgroundcolor":"0xffa500ff",
+    "bordercolor":"0x000000ff",
+    "paneScale":487.6923076923077,
+    "thickness":0.001,
+    "dimensionW":802.0,
+    "dimensionH":536.0,
+    "Subregion":[
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":1,
+            "green":80,
+            "blue":1
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":2,
+            "green":146,
+            "blue":2
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":3,
+            "green":166,
+            "blue":3
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":4,
+            "green":61,
+            "blue":4
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":5,
+            "green":106,
+            "blue":5
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":6,
+            "green":120,
+            "blue":6
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":7,
+            "green":165,
+            "blue":7
+        }
+    ],
+    "image location":[
+    ],
+    "image url":[
+    ]
+}

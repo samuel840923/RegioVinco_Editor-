@@ -23,12 +23,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -137,10 +142,14 @@ public class Workspace extends AppWorkspaceComponent{
     double dimY;
     double orginX;
     double orginY;
-    
+    double stopY;
+    double stopX;
     int now;
     int prev=0;
+    int prevPoly;
+    int nowPoly;
     Image nowImage;
+    ImageView imageV;
     
  public Workspace(AppTemplate initApp) throws IOException {
 	// KEEP THIS FOR LATER
@@ -218,6 +227,7 @@ public class Workspace extends AppWorkspaceComponent{
   }
     @Override
     public void reloadWorkspace() {
+        now=0;prev=0;prevPoly=0;nowPoly=0;
        workspace.getItems().clear();
        clipPane.getChildren().clear();
        mapPane.getChildren().clear();
@@ -238,12 +248,14 @@ public class Workspace extends AppWorkspaceComponent{
        back.setFill(background);
        polygonPane = drawPolygon();
        imagePane = redrawImage();
+   
        setScale();
        clipPane.getChildren().addAll(polygonPane,imagePane);
        workspace.getItems().addAll(mapPane,TablePane);
        app.getGUI().getAppPane().setCenter(workspace);
+       imagePane.setPickOnBounds(false);
        done = true;
-      
+    
     
                }
 
@@ -295,8 +307,27 @@ public class Workspace extends AppWorkspaceComponent{
           control.pauseMusic();
       });
       regionTable.setOnMousePressed(e-> {
+        if(e.getClickCount()==2){
+            int i=  regionTable.getSelectionModel().getFocusedIndex();
+             control.processSubregion(i);
+           }
+           else if(e.getClickCount()==1){
+             nowPoly = regionTable.getSelectionModel().getFocusedIndex();
+              ColorAdjust colorAdjust = new ColorAdjust();
+             colorAdjust.setBrightness(1);
+                  polygon.get(prevPoly).setEffect(null);
+                  polygon.get(nowPoly).setEffect(colorAdjust);
+                  prevPoly = nowPoly;
+           }
           
       });
+//      regionTable.setRowFactory(e -> {
+//            TableRow<Subregion> row = new TableRow<>();
+//            row.setOnMouseClicked( event -> {
+//          
+//            });
+//            return row;
+//        });
       dimension.setOnAction(e ->{
            DataManager data = (DataManager)app.getDataComponent();
           control.processDimension();
@@ -332,9 +363,9 @@ public class Workspace extends AppWorkspaceComponent{
                double locY = data.getLocation().get(i).getY();
                
                Image image = new Image(url);
-               ImageView imageV = new ImageView(image);
-               imageV.setLayoutX(locX);
-               imageV.setLayoutY(locY);
+               imageV = new ImageView(image);
+               imageV.setX(locX);
+               imageV.setY(locY);
                imageview.add(imageV);
           imagePane.getChildren().add(imageV);
           setImageControll(imageV);
@@ -369,7 +400,8 @@ public class Workspace extends AppWorkspaceComponent{
               poly.setStrokeWidth(thick);
               poly.setId(j+"");
               this.polygon.add(poly);
-              polygonPane.getChildren().add(poly);            
+              polygonPane.getChildren().add(poly);  
+              polyControll(poly);
       } 
            xAvg = avgX/m;
            yAvg = avgY/m;
@@ -450,7 +482,6 @@ public class Workspace extends AppWorkspaceComponent{
     private void randomColor() {
          DataManager data = (DataManager)app.getDataComponent();
          randomC = new ArrayList<Integer>();
-         int d = 1;
          for(int i=0;i<polygon.size();i++){
               int random =(int) (254* Math.random())+1;
              for(int j =0;j<randomC.size();j++){
@@ -468,9 +499,9 @@ public class Workspace extends AppWorkspaceComponent{
            int color = randomC.get(i);
            Color c = Color.rgb(color, color, color);
            polygon.get(i).setFill(c);
+           data.getRegion().get(i).setR(color);
            data.getRegion().get(i).setG(color);
-           data.getRegion().get(i).setG(color);
-           data.getRegion().get(i).setG(color);
+           data.getRegion().get(i).setB(color);
        }
        
     }
@@ -478,32 +509,30 @@ public class Workspace extends AppWorkspaceComponent{
     public void addimage(String url) {
          DataManager data = (DataManager)app.getDataComponent();
         Image image= new Image(url);
-        ImageView view = new ImageView(image);
-        view.setX(802/2);
-        view.setY(536/2);
-        imageview.add(view);
-        imagePane.getChildren().add(view);
-        setImageControll(view);
+         imageV = new ImageView(image);
+        imageV.setX(802/2);
+        imageV.setY(536/2);
+        imageview.add(imageV);
+        imagePane.getChildren().add(imageV);
+        setImageControll(imageV);
         
     }
 
     public void setImageControll(ImageView view) {
        DataManager data = (DataManager)app.getDataComponent();
        view.setOnMouseDragged(e->{
-//           double delX = e.getX()-orginX;
-//           double delY = e.getY()-orginY;
-//          double nowX = view.getX();
-//          double nowY = view.getY();
-           view.setX(e.getX());
-           view.setY(e.getY());
-           System.out.println(e.getX());
+           double dX = e.getX() - orginX ;
+           double dY =e.getY() - orginY ;
+           view.setX(stopX+dX);
+           view.setY(stopY+dY);
        });
       
+
        view.setOnMouseClicked(e->{  
           
            for(int i=0;i<imageview.size();i++){
                if(imageview.get(i)==view)
-                   now = i;
+                   now = i;          
            }
            imageview.get( prev).setEffect(null);
            
@@ -513,11 +542,22 @@ public class Workspace extends AppWorkspaceComponent{
           nowImage = imageview.get(now).getImage();
           prev = now;
           removeImage.setDisable(false);
+          stopX = imageview.get(now).getX();
+          stopY = imageview.get(now).getY();       
+          
        });
        view.setOnMousePressed(e->{
            orginX = e.getX();
            orginY = e.getY();
        });
+       view.setOnMouseReleased(e->{
+           for(int i=0;i<imageview.size();i++){
+               if(imageview.get(i)==view){
+                   data.editLocation(i,view.getX(),view.getY());               
+               }
+           }
+       });
+       
        
       
     }
@@ -538,5 +578,29 @@ public class Workspace extends AppWorkspaceComponent{
     }
     public Pane getSnapPane(){
         return clipPane;
+    }
+
+    private void polyControll(Polygon poly) {
+         DataManager data = (DataManager)app.getDataComponent();
+         Controller control = new Controller(app);
+        poly.setOnMouseClicked(e->{
+            if(e.getClickCount()==2){
+               int i = Integer.parseInt(poly.getId());
+               control.processSubregion(i);
+            }
+            else if(e.getClickCount()==1){
+               nowPoly = Integer.parseInt(poly.getId());
+            regionTable.getSelectionModel().select(nowPoly);
+             ColorAdjust colorAdjust = new ColorAdjust();
+             colorAdjust.setBrightness(1);
+                  polygon.get(prevPoly).setEffect(null);
+                  polygon.get(nowPoly).setEffect(colorAdjust);
+                  prevPoly = nowPoly;
+            
+                  
+           }
+            
+        });
+        
     }
 }
