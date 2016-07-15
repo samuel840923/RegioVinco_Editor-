@@ -93,7 +93,9 @@ public class SubregionDialog extends Stage{
          flagPic = new ImageView();
          leaderPic = new ImageView();
          flagPic.setFitWidth(200);
+         flagPic.setFitHeight(200);
          leaderPic.setFitHeight(200);
+         leaderPic.setFitWidth(200);
          dialog.add(flagPic, 1, 3);
          dialog.add(leaderPic, 1, 4);
          buttonPane = new HBox();

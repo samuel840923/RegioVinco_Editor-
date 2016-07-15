@@ -6,52 +6,52 @@
     "subregions_have_leaders":false,
     "subregions":[
         {
-            "name":"Bratislava",
-            "red":250,
-            "green":250,
-            "blue":250
+            "name":"To be fill",
+            "red":1,
+            "green":1,
+            "blue":1
         },
         {
-            "name":"Trnava",
-            "red":249,
-            "green":249,
-            "blue":249
+            "name":"To be fill",
+            "red":2,
+            "green":2,
+            "blue":2
         },
         {
-            "name":"Trencin",
-            "red":248,
-            "green":248,
-            "blue":249
+            "name":"To be fill",
+            "red":3,
+            "green":3,
+            "blue":3
         },
         {
-            "name":"Nitra",
-            "red":247,
-            "green":247,
-            "blue":247
+            "name":"To be fill",
+            "red":4,
+            "green":4,
+            "blue":4
         },
         {
-            "name":"Zilina",
-            "red":246,
-            "green":246,
-            "blue":246
+            "name":"To be fill",
+            "red":5,
+            "green":5,
+            "blue":5
         },
         {
-            "name":"Banska Bystrica",
-            "red":245,
-            "green":245,
-            "blue":245
+            "name":"To be fill",
+            "red":6,
+            "green":6,
+            "blue":6
         },
         {
-            "name":"Presov",
-            "red":244,
-            "green":244,
-            "blue":244
+            "name":"To be fill",
+            "red":7,
+            "green":7,
+            "blue":7
         },
         {
-            "name":"Kosice",
-            "red":243,
-            "green":243,
-            "blue":243
+            "name":"To be fill",
+            "red":8,
+            "green":8,
+            "blue":8
         }
     ]
 }

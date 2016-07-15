@@ -1,6 +1,6 @@
 
 {
-    "file parent":"./HW5SampleData/export/The World/Europe/Slovakia",
+    "file parent":"To be edit",
     "country name":"Slovakia",
     "geometricFilePath":"./HW5SampleData/raw_map_data/Slovakia.json",
     "backgroundcolor":"0xffa500ff",
@@ -12,30 +12,38 @@
     "Subregion":[
         {
             "name":"Bratislava",
-            "capital":"mlb",
-            "leader":"aka",
-            "red":220,
-            "green":220,
-            "blue":220
+            "capital":"null",
+            "leader":"null",
+            "red":250,
+            "green":250,
+            "blue":250
         },
         {
             "name":"Trnava",
             "capital":"null",
             "leader":"null",
-            "red":120,
-            "green":120,
-            "blue":120
+            "red":249,
+            "green":249,
+            "blue":249
         },
         {
             "name":"Trencin",
             "capital":"null",
             "leader":"null",
-            "red":122,
-            "green":122,
-            "blue":122
+            "red":248,
+            "green":248,
+            "blue":249
         },
         {
             "name":"Nitra",
+            "capital":"null",
+            "leader":"null",
+            "red":247,
+            "green":247,
+            "blue":247
+        },
+        {
+            "name":"Zilina",
             "capital":"null",
             "leader":"null",
             "red":246,
@@ -43,54 +51,46 @@
             "blue":246
         },
         {
-            "name":"Zilina",
-            "capital":"asd",
-            "leader":"d",
-            "red":203,
-            "green":203,
-            "blue":203
-        },
-        {
             "name":"Banska Bystrica",
             "capital":"null",
             "leader":"null",
-            "red":157,
-            "green":157,
-            "blue":157
+            "red":245,
+            "green":245,
+            "blue":245
         },
         {
             "name":"Presov",
             "capital":"null",
             "leader":"null",
-            "red":187,
-            "green":187,
-            "blue":187
+            "red":244,
+            "green":244,
+            "blue":244
         },
         {
             "name":"Kosice",
             "capital":"null",
             "leader":"null",
-            "red":198,
-            "green":198,
-            "blue":198
+            "red":243,
+            "green":243,
+            "blue":243
         }
     ],
     "image location":[
         {
-            "x":538.0,
-            "y":373.0
+            "x":25.0,
+            "y":25.0
         },
         {
-            "x":41.0,
-            "y":11.0
+            "x":482.0,
+            "y":375.0
         }
     ],
     "image url":[
         {
-            "image":"file:./HW5SampleData/export/The World/Europe/Slovakia Flag.png"
+            "image":"file:./HW5SampleData/export/The World/Europe/Slovenian Flag.png"
         },
         {
-            "image":"file:./HW5SampleData/export/The World/Europe/Slovenian Flag.png"
+            "image":"file:/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Albania Flag.png"
         }
     ]
 }

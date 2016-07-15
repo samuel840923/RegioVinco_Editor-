@@ -1,0 +1,84 @@
+
+{
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Slovakia",
+    "country name":"Slovakia",
+    "geometricFilePath":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/Slovakia.json",
+    "backgroundcolor":"0x4d3399ff",
+    "bordercolor":"0x000000ff",
+    "paneScale":26.615384615384613,
+    "thickness":0.1,
+    "dimensionW":802.0,
+    "dimensionH":536.0,
+    "tranX":0.0,
+    "tranY":0.0,
+    "Subregion":[
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":1,
+            "green":1,
+            "blue":1
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":2,
+            "green":2,
+            "blue":2
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":3,
+            "green":3,
+            "blue":3
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":4,
+            "green":4,
+            "blue":4
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":5,
+            "green":5,
+            "blue":5
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":6,
+            "green":6,
+            "blue":6
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":7,
+            "green":7,
+            "blue":7
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":8,
+            "green":8,
+            "blue":8
+        }
+    ],
+    "image location":[
+    ],
+    "image url":[
+    ]
+}

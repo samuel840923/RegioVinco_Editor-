@@ -1,21 +1,23 @@
 
 {
-    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/work/aasdas",
-    "country name":"aasdas",
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Andorra",
+    "country name":"Andorra",
     "geometricFilePath":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/Andorra.json",
-    "backgroundcolor":"0xffa500ff",
-    "bordercolor":"0x000000ff",
-    "paneScale":487.6923076923077,
+    "backgroundcolor":"0xe6b3e6ff",
+    "bordercolor":"0x664db3ff",
+    "paneScale":269.96153846153845,
     "thickness":0.001,
-    "dimensionW":802.0,
-    "dimensionH":536.0,
+    "dimensionW":700.0,
+    "dimensionH":700.0,
+    "tranX":0.0,
+    "tranY":0.0,
     "Subregion":[
         {
-            "name":"To be fill",
+            "name":"gbb",
             "capital":"null",
             "leader":"null",
             "red":1,
-            "green":80,
+            "green":1,
             "blue":1
         },
         {
@@ -23,7 +25,7 @@
             "capital":"null",
             "leader":"null",
             "red":2,
-            "green":146,
+            "green":2,
             "blue":2
         },
         {
@@ -31,7 +33,7 @@
             "capital":"null",
             "leader":"null",
             "red":3,
-            "green":166,
+            "green":3,
             "blue":3
         },
         {
@@ -39,7 +41,7 @@
             "capital":"null",
             "leader":"null",
             "red":4,
-            "green":61,
+            "green":4,
             "blue":4
         },
         {
@@ -47,15 +49,15 @@
             "capital":"null",
             "leader":"null",
             "red":5,
-            "green":106,
+            "green":5,
             "blue":5
         },
         {
-            "name":"To be fill",
+            "name":"oko",
             "capital":"null",
             "leader":"null",
             "red":6,
-            "green":120,
+            "green":6,
             "blue":6
         },
         {
@@ -63,12 +65,19 @@
             "capital":"null",
             "leader":"null",
             "red":7,
-            "green":165,
+            "green":7,
             "blue":7
         }
     ],
     "image location":[
+        {
+            "x":34.0,
+            "y":44.0
+        }
     ],
     "image url":[
+        {
+            "image":"file:/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Austria Flag.png"
+        }
     ]
 }

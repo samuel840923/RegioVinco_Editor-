@@ -31,6 +31,7 @@ import static saf.settings.AppPropertyType.WORK_FILE_EXT;
 import static saf.settings.AppPropertyType.WORK_FILE_EXT_DESC;
 import static saf.settings.AppStartupConstants.FILE_PROTOCOL;
 import static saf.settings.AppStartupConstants.PATH_WORK;
+import saf.ui.AppMessageDialogSingleton;
 
 /**
  *
@@ -92,24 +93,21 @@ public class Controller {
     dialog.setHeaderText(props.getProperty(PropertyType.RENAME_HEADER));
     dialog.setContentText(props.getProperty(PropertyType.RENAME_CONTENT));
     Optional<String> result = dialog.showAndWait();
-    System.out.println(result.get());
+ 
     
  String newParent =    AppFileController.changeName(result.get());
  data.setParentDir(newParent);
  data.setName(result.get());
+ System.out.println(data.getName());
     
     }
 
   public  void processExport() {
       try{
-        FileChooser fc = new FileChooser();
-         PropertiesManager props = PropertiesManager.getPropertiesManager();
-                DataManager dataManager = (DataManager)app.getDataComponent();
-		AppFileComponent fileManager = app.getFileComponent();
-		fc.setInitialDirectory(new File("./HW5SampleData/work/"));
-                fc.setInitialFileName(dataManager.getName());
-		fc.getExtensionFilters().add( new FileChooser.ExtensionFilter(props.getProperty(WORK_FILE_EXT_DESC),  props.getProperty(WORK_FILE_EXT)));
-                File selectedFile = fc.showSaveDialog(app.getGUI().getWindow());
+          DataManager data = (DataManager)app.getDataComponent();
+          String parent = data.getParentDir()+"/"+data.getName()+".rvm";
+          FileManager fileManager = new FileManager();
+                File selectedFile = new File(parent);
                 
                 if(selectedFile!=null){
                     String fileString = selectedFile.getAbsolutePath();
@@ -119,10 +117,10 @@ public class Controller {
                      System.out.println(png);
                     WritableImage image = workspace.clipPane.snapshot(new SnapshotParameters(), null);
                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", export);
-
-                fileManager.exportData(dataManager, selectedFile.getAbsolutePath());
+                   fileManager.exportData(data, selectedFile.getAbsolutePath());
                 }
-                
+                AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
+                dialog.show("Sucess!", "You have exported the file");
                 }catch(IOException e){
             System.out.println("Error occur");
         }

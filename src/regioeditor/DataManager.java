@@ -56,6 +56,8 @@ import saf.components.AppDataComponent;
     ArrayList<Point2D> imageLocation;
     double dimensionW;
     double dimensionH;
+    double tranX;
+    double tranY;
     public DataManager(AppTemplate initApp) throws Exception {
 	// KEEP THE APP FOR LATER
 	app = initApp;
@@ -72,6 +74,18 @@ import saf.components.AppDataComponent;
         
       
         
+    }
+    public void setTranX(double x){
+        tranX =x;
+    }
+     public void setTranY(double y){
+        tranY =y;
+    }
+      public double getTranX(){
+       return tranX;
+    }
+     public double getTranY(){
+       return tranY ;
     }
     public void setName(String s){
         regionName =s;
@@ -169,7 +183,7 @@ import saf.components.AppDataComponent;
     }
     public boolean isFlagExist(String name){
         for(int i =0;i<region.size();i++){
-            String dir = "./HW5SampleData/export/The World/Europe/"+name+"/";
+            String dir = filename+name+"/";
             String flag = region.get(i).getName()+" Flag.png";
             File file = new File(dir+flag);
             if(!(file.exists()))
@@ -180,7 +194,7 @@ import saf.components.AppDataComponent;
     }
     public boolean isLeaderExist(String name){
         for(int i =0;i<region.size();i++){
-            String dir = "./HW5SampleData/export/The World/Europe/"+name+"/";
+            String dir = filename+name+"/";
             if(region.get(i).getLeader().equals("null"))
                 return false;
             String lead = region.get(i).getLeader()+".png";
@@ -232,6 +246,10 @@ import saf.components.AppDataComponent;
     }
     public void editRegion(int i,Subregion s){
         region.set(i, s);
+    }
+
+    void removeLocation(int in) {
+       imageLocation.remove(in);
     }
     }
     

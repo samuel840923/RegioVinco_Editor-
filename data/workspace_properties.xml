@@ -40,7 +40,7 @@
          <property name = "REDO_TOOLTIP"                value = "Reasign color"></property>
 	
 	<!-- HEADINGS AND PROMPTS -->
-	<property name="WORKSPACE_HEADING_LABEL"    value="To Do List"></property>
+	<property name="WORKSPACE_HEADING_LABEL"    value="Regio Editor"></property>
 	<property name="DETAILS_HEADING_LABEL"	    value="Details"></property>
 	<property name="NAME_PROMPT"                value="Name of Todo List:"></property>
 	<property name="OWNER_PROMPT"               value="Owner:"></property>

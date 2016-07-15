@@ -32,6 +32,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
@@ -177,10 +178,10 @@ public class Workspace extends AppWorkspaceComponent{
       editToolBar1 = new HBox();
       editToolBar2 = new HBox();
       mapPane = new Pane();
-      export = gui.initChildButton(app.getGUI().getToolBar(),EXPORT_ICON.toString(), EXPORT_TOOLTIP.toString(),	false);
-      addImage = gui.initChildButton(editToolBar1, PropertyType.ADD_ICON.toString(), PropertyType.ADD_ITEM_TOOLTIP.toString(), false);
-      removeImage = gui.initChildButton(editToolBar1, PropertyType.REMOVE_ICON.toString(), PropertyType.REMOVE_ITEM_TOOLTIP.toString(), true);
-      play = gui.initChildButton(editToolBar1, PropertyType.PLAY_ICON.toString(), PropertyType.PLAY_TOOLTIP.toString(), false);
+      export = gui.initChildButton(app.getGUI().getToolBar(),EXPORT_ICON.toString(), EXPORT_TOOLTIP.toString(),	true);     
+      addImage = gui.initChildButton(editToolBar1, PropertyType.ADD_ICON.toString(), PropertyType.ADD_ITEM_TOOLTIP.toString(), false);     
+      removeImage = gui.initChildButton(editToolBar1, PropertyType.REMOVE_ICON.toString(), PropertyType.REMOVE_ITEM_TOOLTIP.toString(), true);    
+      play = gui.initChildButton(editToolBar1, PropertyType.PLAY_ICON.toString(), PropertyType.PLAY_TOOLTIP.toString(), false);    
       pause = gui.initChildButton(editToolBar1, PropertyType.PAUSE_ICON.toString(), PropertyType.PAUSE_TOOLTIP.toString(), false);
       zoom = new Label(props.getProperty(PropertyType.ZOOM));
       backgroundColor = new Label(props.getProperty(PropertyType.BACKGROUND_COLOR));
@@ -197,7 +198,7 @@ public class Workspace extends AppWorkspaceComponent{
       
       TablePane.getChildren().add(editToolBar1);
       TablePane.getChildren().add(editToolBar2);
-      regionTable = new TableView();   
+      regionTable = new TableView();  
       mapLabel = new Label(DEFAULT_STRING);
      
       dimension = gui.initChildButton(editToolBar2, PropertyType.DIMENSION_ICON.toString(), PropertyType.DIMENSION_TOOLTIP.toString(), false);
@@ -228,6 +229,7 @@ public class Workspace extends AppWorkspaceComponent{
     @Override
     public void reloadWorkspace() {
         now=0;prev=0;prevPoly=0;nowPoly=0;
+        export.setDisable(false);
        workspace.getItems().clear();
        clipPane.getChildren().clear();
        mapPane.getChildren().clear();
@@ -254,6 +256,8 @@ public class Workspace extends AppWorkspaceComponent{
        workspace.getItems().addAll(mapPane,TablePane);
        app.getGUI().getAppPane().setCenter(workspace);
        imagePane.setPickOnBounds(false);
+       polygonPane.setFocusTraversable(true);
+       
        done = true;
     
     
@@ -294,10 +298,12 @@ public class Workspace extends AppWorkspaceComponent{
       addImage.setOnAction(e-> {
           String url = control.processAddImage();
           addimage(url);
+          app.getGUI().updateToolbarControls(false);
       }); 
       removeImage.setOnAction(e-> {
           control.processRemoveImage();
          deletImage();
+         app.getGUI().updateToolbarControls(false);
           
       });
       play.setOnAction(e-> {
@@ -310,6 +316,7 @@ public class Workspace extends AppWorkspaceComponent{
         if(e.getClickCount()==2){
             int i=  regionTable.getSelectionModel().getFocusedIndex();
              control.processSubregion(i);
+             app.getGUI().updateToolbarControls(false);
            }
            else if(e.getClickCount()==1){
              nowPoly = regionTable.getSelectionModel().getFocusedIndex();
@@ -336,9 +343,11 @@ public class Workspace extends AppWorkspaceComponent{
            back.setWidth(data.getDimensionW());
           back.setHeight(data.getDimensionH());
           clipPane.setPrefSize(data.getDimensionW(), data.getDimensionH());
+          app.getGUI().updateToolbarControls(false);
       });
       rename.setOnAction(e -> {
           control.processRename();
+          app.getGUI().updateToolbarControls(false);
       });
       
       export.setOnAction(e -> {
@@ -348,6 +357,7 @@ public class Workspace extends AppWorkspaceComponent{
       
       reassign.setOnAction(e->{
           randomColor();
+          app.getGUI().updateToolbarControls(false);
       });
         
     }
@@ -395,7 +405,7 @@ public class Workspace extends AppWorkspaceComponent{
               int blue = data.getRegion().get(j).getB();
               Color c =  Color.rgb(red,green,blue);
               double thick = data.getThickness();
-              poly.setStroke(Paint.valueOf("Black"));
+              poly.setStroke(data.getBorderColor());
               poly.setFill(c);    
               poly.setStrokeWidth(thick);
               poly.setId(j+"");
@@ -410,7 +420,8 @@ public class Workspace extends AppWorkspaceComponent{
                polygonPane.setLayoutY((polygonPane.getLayoutY()+(536/2-yAvg))*scale);
                polygonPane.setScaleX(polygonPane.getScaleX()*scale);
                polygonPane.setScaleY(polygonPane.getScaleY()*scale);
-                
+               polygonPane.setTranslateX(data.getTranX());
+               polygonPane.setTranslateY(data.getTranY());
            
            polygonPane.setPrefSize(802, 536); 
            polygonPane.requestLayout();
@@ -434,8 +445,6 @@ public class Workspace extends AppWorkspaceComponent{
         colorBorder = new ColorPicker(data.getBorderColor());
         colorBackground = new ColorPicker(data.getBackgroundColor());
         editToolBar2.getChildren().clear();
-         
-
         editToolBar2.getChildren().addAll(dimension,reassign,backgroundColor,colorBackground,
         borderColor,colorBorder,rename);
         colorBorder.getStyleClass().add(CLASS_BUTTON);
@@ -451,13 +460,17 @@ public class Workspace extends AppWorkspaceComponent{
            polygonPane.setLayoutX(((802/2-xAvg))*zooming.getValue());
            polygonPane.setLayoutY(((536/2-yAvg))*zooming.getValue());
            data.setScale(zooming.getValue());
+           app.getGUI().updateToolbarControls(false);
+           
         });
         
        thickness.valueProperty().addListener(e->{
         for(int i=0;i<polygon.size();i++){
             polygon.get(i).setStrokeWidth(thickness.getValue());
             data.setThickness(thickness.getValue());
+            app.getGUI().updateToolbarControls(false);
         }
+     
         });
        
        
@@ -467,6 +480,7 @@ public class Workspace extends AppWorkspaceComponent{
             polygon.get(i).setStroke(c);
           }
             data.setBorderColor(c);
+            app.getGUI().updateToolbarControls(false);
         });
         
         
@@ -474,8 +488,30 @@ public class Workspace extends AppWorkspaceComponent{
              Color c = colorBackground.getValue();
              back.setFill(c);
              data.setBackgroundColor(c);
+             app.getGUI().updateToolbarControls(false);
         });
-        
+        polygonPane.setOnMouseClicked(e->{
+            polygonPane.requestFocus();
+        });
+        polygonPane.setOnKeyPressed(e->{
+            
+           if(e.getCode()==KeyCode.RIGHT){
+               moving(-10,0);
+              
+           }
+           if(e.getCode()==KeyCode.LEFT){
+               moving(10,0);
+               
+           }
+           if(e.getCode()==KeyCode.UP){
+              moving(0,10);
+               
+           }
+           if(e.getCode()==KeyCode.DOWN){
+               moving(0,-10);
+             
+           }
+        });
 
     }
 
@@ -515,7 +551,8 @@ public class Workspace extends AppWorkspaceComponent{
         imageview.add(imageV);
         imagePane.getChildren().add(imageV);
         setImageControll(imageV);
-        
+        data.addImages(url);
+        data.addLocation(new Point2D(802/2,536/2));
     }
 
     public void setImageControll(ImageView view) {
@@ -539,7 +576,7 @@ public class Workspace extends AppWorkspaceComponent{
             DropShadow borderGlow= new DropShadow();
            borderGlow.setColor(Color.RED);
           imageview.get(now).setEffect(borderGlow);
-          nowImage = imageview.get(now).getImage();
+          nowImage = view.getImage();
           prev = now;
           removeImage.setDisable(false);
           stopX = imageview.get(now).getX();
@@ -556,6 +593,7 @@ public class Workspace extends AppWorkspaceComponent{
                    data.editLocation(i,view.getX(),view.getY());               
                }
            }
+           app.getGUI().updateToolbarControls(false);
        });
        
        
@@ -574,6 +612,8 @@ public class Workspace extends AppWorkspaceComponent{
               }
           }
           data.removeImage(in);
+          data.removeLocation(in);
+          app.getGUI().updateToolbarControls(false);
           
     }
     public Pane getSnapPane(){
@@ -589,6 +629,7 @@ public class Workspace extends AppWorkspaceComponent{
                control.processSubregion(i);
             }
             else if(e.getClickCount()==1){
+               
                nowPoly = Integer.parseInt(poly.getId());
             regionTable.getSelectionModel().select(nowPoly);
              ColorAdjust colorAdjust = new ColorAdjust();
@@ -597,10 +638,18 @@ public class Workspace extends AppWorkspaceComponent{
                   polygon.get(nowPoly).setEffect(colorAdjust);
                   prevPoly = nowPoly;
             
-                  
-           }
+                }
             
         });
-        
+       
     }
+     public void moving(double x, double y){
+         DataManager data = (DataManager)app.getDataComponent();
+               polygonPane.setTranslateX(polygonPane.getTranslateX()+x);
+               polygonPane.setTranslateY(polygonPane.getTranslateY()+y);
+               data.setTranX(polygonPane.getTranslateX());
+               data.setTranY(polygonPane.getTranslateY());
+               app.getGUI().updateToolbarControls(false);
+               
+        }
 }

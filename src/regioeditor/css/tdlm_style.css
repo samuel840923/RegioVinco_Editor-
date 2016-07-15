@@ -57,8 +57,8 @@
 }
 .new_map_dialog{
     -fx-background-color:lightskyblue; 
-       -fx-padding:30;
-        -fx-spacing: 100;
+       -fx-padding:50;
+        -fx-spacing: 50;
       
 }
 .dimenstion_dialog{

@@ -62,6 +62,9 @@ public class FileManager implements AppFileComponent{
        static final String JSON_IMAGE_URL = "image url";
       static final String JSON_IMAAGE = "image";
        static final String JSON_PARENT = "file parent";
+         static final String JSON_TRANX = "tranX";
+       static final String JSON_TRANY = "tranY";
+       
       
      //GEOMETRIC X Y    
     static final String JSON_SUBREGION = "SUBREGIONS";
@@ -87,7 +90,7 @@ public class FileManager implements AppFileComponent{
         for (int i=0;i<items.size();i++) {
             String cap = items.get(i).getCapital();
             String led = items.get(i).getLeader();
-            System.out.println(items.get(i).getR()+" "+items.get(i).getG()+" "+ items.get(i).getB());
+          
 	        JsonObject itemJson = Json.createObjectBuilder()
                    .add(JSON_REGION , items.get(i).getName())       
                    .add(JSON_CAPITAL , cap)
@@ -136,6 +139,8 @@ public class FileManager implements AppFileComponent{
 		.add(JSON_THICKNESS, data.getThickness())
                 .add(JSON_DIMENSION_W, data.getDimensionW())
 		.add(JSON_DIMENSION_H, data.getDimensionH())
+                .add(JSON_TRANX, data.getTranX())
+                .add(JSON_TRANY, data.getTranY())
                 .add(JSON_SUBREGIONS,itemsArray)
                 .add(JSON_IMAGE_LOCATE,locateArray)
                 .add(JSON_IMAGE_URL,imageArray)
@@ -176,6 +181,10 @@ public class FileManager implements AppFileComponent{
     double thick = getDataAsDouble(json,JSON_THICKNESS);
     double dW = getDataAsDouble(json,JSON_DIMENSION_W);
     double dH = getDataAsDouble(json,JSON_DIMENSION_H);
+    double tranx = getDataAsDouble(json,JSON_TRANX);
+    double trany = getDataAsDouble(json,JSON_TRANY);
+    data.setTranX(tranx);
+    data.setTranY(trany);
     data.setParentDir(json.getString(JSON_PARENT));
     data.setfilePath(geoFile);
     data.setName(countryName);
