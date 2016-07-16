@@ -1,0 +1,297 @@
+
+{
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/work/I want you",
+    "country name":"I want you",
+    "geometricFilePath":"/Users/samuelchen/Documents/cse 219 hw/MapViewer/work/AFG_adm1.json",
+    "backgroundcolor":"0xffa500ff",
+    "bordercolor":"0x000000ff",
+    "paneScale":26.628205128205128,
+    "thickness":0.001,
+    "dimensionW":802.0,
+    "dimensionH":536.0,
+    "tranX":40.0,
+    "tranY":40.0,
+    "Subregion":[
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":37,
+            "green":37,
+            "blue":37
+        },
+        {
+            "name":"Canillo",
+            "capital":"Canillo",
+            "leader":"Josep Areny",
+            "red":144,
+            "green":144,
+            "blue":144
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":169,
+            "green":169,
+            "blue":169
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":25,
+            "green":25,
+            "blue":25
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":215,
+            "green":215,
+            "blue":215
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":92,
+            "green":92,
+            "blue":92
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":156,
+            "green":156,
+            "blue":156
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":98,
+            "green":98,
+            "blue":98
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":78,
+            "green":78,
+            "blue":78
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":105,
+            "green":105,
+            "blue":105
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":200,
+            "green":200,
+            "blue":200
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":205,
+            "green":205,
+            "blue":205
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":128,
+            "green":128,
+            "blue":128
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":165,
+            "green":165,
+            "blue":165
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":61,
+            "green":61,
+            "blue":61
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":4,
+            "green":4,
+            "blue":4
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":201,
+            "green":201,
+            "blue":201
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":202,
+            "green":202,
+            "blue":202
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":20,
+            "green":20,
+            "blue":20
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":204,
+            "green":204,
+            "blue":204
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":172,
+            "green":172,
+            "blue":172
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":101,
+            "green":101,
+            "blue":101
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":190,
+            "green":190,
+            "blue":190
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":191,
+            "green":191,
+            "blue":191
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":209,
+            "green":209,
+            "blue":209
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":211,
+            "green":211,
+            "blue":211
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":207,
+            "green":207,
+            "blue":207
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":244,
+            "green":244,
+            "blue":244
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":40,
+            "green":40,
+            "blue":40
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":102,
+            "green":102,
+            "blue":102
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":173,
+            "green":173,
+            "blue":173
+        },
+        {
+            "name":"To be fill",
+            "capital":"null",
+            "leader":"null",
+            "red":154,
+            "green":154,
+            "blue":154
+        }
+    ],
+    "image location":[
+        {
+            "x":401.0,
+            "y":268.0
+        },
+        {
+            "x":11.0,
+            "y":23.0
+        },
+        {
+            "x":486.0,
+            "y":386.0
+        }
+    ],
+    "image url":[
+        {
+            "image":"file:null"
+        },
+        {
+            "image":"file:/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Andorra Flag.png"
+        },
+        {
+            "image":"file:/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Belarus Flag.png"
+        }
+    ]
+}

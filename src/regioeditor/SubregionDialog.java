@@ -133,9 +133,9 @@ public class SubregionDialog extends Stage{
      capText.setText( data.getRegion().get(i).getCapital());
      ledText.setText( data.getRegion().get(i).getLeader());
      String parent = data.getParentDir();
-       String flagPath = FILE_PROTOCOL + parent +"/"+ data.getRegion().get(i).getCapital()+" Flag.png";
+       String flagPath = FILE_PROTOCOL + parent +"/"+ data.getRegion().get(i).getName()+" Flag.png";
        String ledPath = FILE_PROTOCOL +  parent +"/" +data.getRegion().get(i).getLeader()+".png";
-       System.out.println(ledPath);
+       
        Image flagImage = new Image(flagPath);
        Image ledImage = new Image(ledPath);
        flagPic.setImage(flagImage);

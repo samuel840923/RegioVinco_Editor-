@@ -10,7 +10,7 @@
     "dimensionW":700.0,
     "dimensionH":700.0,
     "tranX":0.0,
-    "tranY":0.0,
+    "tranY":-210.0,
     "Subregion":[
         {
             "name":"gbb",

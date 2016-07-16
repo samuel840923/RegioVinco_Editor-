@@ -183,7 +183,7 @@ import saf.components.AppDataComponent;
     }
     public boolean isFlagExist(String name){
         for(int i =0;i<region.size();i++){
-            String dir = filename+name+"/";
+            String dir = filename+"/";
             String flag = region.get(i).getName()+" Flag.png";
             File file = new File(dir+flag);
             if(!(file.exists()))
@@ -193,8 +193,9 @@ import saf.components.AppDataComponent;
        return true;
     }
     public boolean isLeaderExist(String name){
+      
         for(int i =0;i<region.size();i++){
-            String dir = filename+name+"/";
+            String dir = filename+"/";
             if(region.get(i).getLeader().equals("null"))
                 return false;
             String lead = region.get(i).getLeader()+".png";
@@ -218,6 +219,8 @@ import saf.components.AppDataComponent;
       dimensionW = 802;
       dimensionH = 536;
       filename = parent;
+      tranX =0;
+      tranY=0;
     }
     public String getParentDir(){
         return filename;

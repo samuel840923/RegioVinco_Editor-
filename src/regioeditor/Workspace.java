@@ -187,7 +187,7 @@ public class Workspace extends AppWorkspaceComponent{
       backgroundColor = new Label(props.getProperty(PropertyType.BACKGROUND_COLOR));
       borderColor = new Label(props.getProperty(PropertyType.BORDER_COLOR));
       borderThick = new Label(props.getProperty(PropertyType.BORDER_THICKNESS));
-      zooming = new Slider(1,1000,600);
+      zooming = new Slider(1,2000,1);
       thickness = new Slider(0.001,1,0.01);
       colorBackground = new ColorPicker();
       colorBorder = new ColorPicker();
