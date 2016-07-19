@@ -212,7 +212,7 @@ import saf.components.AppDataComponent;
     public void setStart(String file,String name, String parent) {
       backgroundColor = Color.ORANGE;
       borderColor = Color.BLACK;
-      borderThickness = 0.1;
+      borderThickness = 0.01;
       paneScale = 1.0;
       geometricFile = file;
       regionName = name;
