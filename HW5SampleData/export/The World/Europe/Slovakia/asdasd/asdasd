@@ -1,14 +1,16 @@
 
 {
-    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/last one",
-    "country name":"last one",
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Slovakia/asdasd",
+    "country name":"asdasd",
     "geometricFilePath":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/Slovakia.json",
     "backgroundcolor":"0xffa500ff",
     "bordercolor":"0x000000ff",
     "paneScale":1.0,
-    "thickness":0.1,
+    "thickness":0.01,
     "dimensionW":802.0,
     "dimensionH":536.0,
+    "tranX":0.0,
+    "tranY":0.0,
     "Subregion":[
     ],
     "image location":[

@@ -1,8 +1,8 @@
 
 {
-    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/work/Sana",
-    "country name":"Sana",
-    "geometricFilePath":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/San Marino.json",
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/work/mmmmm",
+    "country name":"mmmmm",
+    "geometricFilePath":"/Users/samuelchen/Documents/cse 219 hw/MapViewer/work/World_adm0.json",
     "backgroundcolor":"0xffa500ff",
     "bordercolor":"0x000000ff",
     "paneScale":1.0,

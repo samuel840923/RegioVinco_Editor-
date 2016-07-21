@@ -8,7 +8,7 @@
 -->
 <properties>
     <property_list>
-        <property name="APP_TITLE"	    value="To Do List Maker"></property>
+        <property name="APP_TITLE"	    value="Regio Editor"></property>
 	<property name="APP_LOGO"	    value="ToDoListMakerLogo.png"></property>
 	<property name="APP_PATH_CSS"	    value="css/"></property>
 	<property name="APP_CSS"	    value="tdlm_style.css"></property>

@@ -351,6 +351,7 @@ public class Workspace extends AppWorkspaceComponent{
       });
       
       export.setOnAction(e -> {
+           polygon.get(nowPoly).setEffect(null);
           control.processExport();
          
       });
@@ -389,7 +390,7 @@ public class Workspace extends AppWorkspaceComponent{
         Pane   polygonPane = new Pane();
            DataManager data = (DataManager) app.getDataComponent();
           ArrayList<ArrayList<Point2D>> polygon = data.getPoly();
-         
+          System.out.println(polygon.size());
           double avgX=0; double avgY=0; double m=0;
            for(int j=0;j<polygon.size();j++){
               ArrayList<Point2D> points = polygon.get(j);

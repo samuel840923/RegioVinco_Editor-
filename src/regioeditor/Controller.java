@@ -114,7 +114,7 @@ public class Controller {
                     String png = fileString.replace("rvm", "png");
                      Workspace workspace = (Workspace)app.getWorkspaceComponent();
                      File export = new File(png);
-                     System.out.println(png);
+                     
                     WritableImage image = workspace.clipPane.snapshot(new SnapshotParameters(), null);
                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", export);
                    fileManager.exportData(data, selectedFile.getAbsolutePath());

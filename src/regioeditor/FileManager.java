@@ -320,13 +320,12 @@ done = true;
            JsonObject Sub_Region_Poly = SubRegion.getJsonObject(i);
            int numOfPoly = getDataAsInt(Sub_Region_Poly,JSON_NUMBER_OF_SUBREGION_POLYGONS);
            
-           JsonArray SubPolyRegion = Sub_Region_Poly.getJsonArray(JSON_SUBREGION_POLYGONS);
-          
+           JsonArray SubPolyRegion = Sub_Region_Poly.getJsonArray(JSON_SUBREGION_POLYGONS);          
            //# of poly
             points = new ArrayList<Point2D>();
            for (int j =0;j<SubPolyRegion.size();j++){
            JsonArray  coordinate = SubPolyRegion.getJsonArray(j); 
-
+           
            //XY
            for (int k = 0;k<coordinate.size() ;k++){
                JsonObject coor = coordinate.getJsonObject(k);
@@ -335,17 +334,17 @@ done = true;
                double W = 802/2;
                double H = 536/2;
                 X+=180;
-               Y=Y*-1+90;
-               X=(X/360.0)*802;
-               Y=(Y/180.0)*536;
-             
+               Y=(Y*-1)+90;
+               X=(X/360)*802.0;
+               Y=(Y/180)*536.0;
+               
                
                Point2D point = new Point2D(X,Y);
                points.add(point);
               }
-          
+         
           }
-             dataManager.addGeo(points);
+              dataManager.addGeo(points);
         }
         
         

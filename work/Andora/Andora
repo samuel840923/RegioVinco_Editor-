@@ -1,69 +1,69 @@
 
 {
-    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Andorra",
-    "country name":"Andorra",
+    "file parent":"/Users/samuelchen/NetBeansProjects/RegioEditor/work/Andora",
+    "country name":"Andora",
     "geometricFilePath":"/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/raw_map_data/Andorra.json",
-    "backgroundcolor":"0xe6b3e6ff",
-    "bordercolor":"0x664db3ff",
-    "paneScale":269.96153846153845,
-    "thickness":0.001,
-    "dimensionW":700.0,
-    "dimensionH":700.0,
+    "backgroundcolor":"0xffa500ff",
+    "bordercolor":"0x000000ff",
+    "paneScale":564.8205128205128,
+    "thickness":0.01,
+    "dimensionW":600.0,
+    "dimensionH":500.0,
     "tranX":0.0,
-    "tranY":-40.0,
+    "tranY":0.0,
     "Subregion":[
         {
-            "name":"gbb",
+            "name":"Test 1",
             "capital":"null",
-            "leader":"null",
+            "leader":"Test 2",
             "red":1,
             "green":1,
             "blue":1
         },
         {
-            "name":"To be fill",
+            "name":"Test 2",
             "capital":"null",
-            "leader":"null",
+            "leader":"Test 2",
             "red":2,
             "green":2,
             "blue":2
         },
         {
-            "name":"To be fill",
+            "name":"Test 2",
             "capital":"null",
-            "leader":"null",
+            "leader":"Test 2",
             "red":3,
             "green":3,
             "blue":3
         },
         {
-            "name":"To be fill",
+            "name":"Test 2",
             "capital":"null",
-            "leader":"null",
+            "leader":"Test 2",
             "red":4,
             "green":4,
             "blue":4
         },
         {
-            "name":"To be fill",
+            "name":"Test 2",
             "capital":"null",
-            "leader":"null",
+            "leader":"Test 2",
             "red":5,
             "green":5,
             "blue":5
         },
         {
-            "name":"oko",
+            "name":"Test 2",
             "capital":"null",
-            "leader":"null",
+            "leader":"Test 2",
             "red":6,
             "green":6,
             "blue":6
         },
         {
-            "name":"To be fill",
+            "name":"Test 2",
             "capital":"null",
-            "leader":"null",
+            "leader":"Test 2",
             "red":7,
             "green":7,
             "blue":7
@@ -71,13 +71,13 @@
     ],
     "image location":[
         {
-            "x":3.0,
-            "y":134.0
+            "x":21.0,
+            "y":34.0
         }
     ],
     "image url":[
         {
-            "image":"file:/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Austria Flag.png"
+            "image":"file:/Users/samuelchen/NetBeansProjects/RegioEditor/HW5SampleData/export/The World/Europe/Andorra Flag.png"
         }
     ]
 }
